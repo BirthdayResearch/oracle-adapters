@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@defichain/salmon-*": [
+        "packages/salmon-*/src"
+      ]
+    }
+  }
+}
