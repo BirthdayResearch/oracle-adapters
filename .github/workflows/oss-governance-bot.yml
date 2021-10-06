@@ -1,0 +1,19 @@
+name: Governance
+
+on:
+  pull_request_target:
+    types: [ synchronize, opened, labeled, unlabeled ]
+  issues:
+    types: [ opened, labeled, unlabeled ]
+  issue_comment:
+    types: [ created ]
+
+jobs:
+  main:
+    name: OSS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DeFiCh/oss-governance-bot@99f1d488fe91acc397cdac556f3c6bd309f28460
+        with:
+          github-token: ${{ secrets.DEFICHAIN_BOT_GITHUB_TOKEN }}
+
