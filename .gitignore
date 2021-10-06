@@ -1,0 +1,38 @@
+# IntelliJ
+.idea/*
+!.idea/inspectionProfiles/
+!.idea/dictionaries/
+!.idea/codeStyles/
+!.idea/modules.xml
+!.idea/*.iml
+!.idea/README.md
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# node_modules
+node_modules
+package-lock.json
+!/package-lock.json
+yarn.lock
+
+# dist & pack
+dist
+*.tgz
+
+# debug log
+lerna-debug.log
+
+coverage
+
+# vscode
+.vscode
+
+# typescript
+tsconfig.build.tsbuildinfo
