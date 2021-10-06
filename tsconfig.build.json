@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/salmon-core/tsconfig.build.json"
+    }
+  ]
+}
