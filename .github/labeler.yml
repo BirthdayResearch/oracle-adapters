@@ -1,0 +1,22 @@
+version: v1
+
+labels:
+  - label: area/workflow
+    sync: true
+    matcher:
+      files: ".github/**"
+
+  - label: area/website
+    sync: true
+    matcher:
+      files: "website/**"
+
+  - label: area/adapters
+    sync: true
+    matcher:
+      files: "adapters/**"
+
+  - label: area/salmon-core
+    sync: true
+    matcher:
+      files: "packages/salmon-core/**"
