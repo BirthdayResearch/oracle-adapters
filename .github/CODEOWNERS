@@ -3,6 +3,9 @@
 
 /.github/                                       @fuxingloh @monstrobishi
 
+/adapters/                                      @fuxingloh @monstrobishi @joeldavidw
+/packages/                                      @fuxingloh @monstrobishi @joeldavidw
+
 CONTRIBUTING.md                                 @fuxingloh @monstrobishi
 README.md                                       @fuxingloh @monstrobishi
 LICENSE                                         @fuxingloh
