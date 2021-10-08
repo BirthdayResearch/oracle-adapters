@@ -1,6 +1,6 @@
 {
   "private": false,
-  "name": "@defichain/salmon-runner",
+  "name": "@defichain/salmon-filter",
   "version": "0.0.0",
   "repository": "DeFiCh/oracle-adapters",
   "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
@@ -28,8 +28,6 @@
   },
   "dependencies": {
     "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/salmon-filter": "0.0.0",
-    "@defichain/salmon-wallet": "0.0.0",
     "@defichain/whale-api-client": ">=0.10.0",
     "@defichain/jellyfish-network": ">=0.46.1"
   },

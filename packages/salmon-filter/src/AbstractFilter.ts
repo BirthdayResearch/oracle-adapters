@@ -1,8 +1,17 @@
 import { AssetPrice } from '@defichain/salmon-fetch'
 import { NetworkName } from '@defichain/jellyfish-network'
 import { WhaleApiClient } from '@defichain/whale-api-client'
-import { NonZeroFilter } from './NonZeroFilter'
 
+/**
+ * AbstractFilter using a chain of responsibility design pattern.
+ *
+ * Configured with network, whale client and oracleId. This filter pattern receive a list of prices for filtering.
+ * Once filtered, it can accept, warn, reject partial by filtering or rejecting all.
+ *
+ * Orchestrated via SalmonFilter and configured to run in the given order.
+ *
+ * @see SalmonFilter
+ */
 export abstract class AbstractFilter {
   constructor (
     protected readonly network: NetworkName,
@@ -18,45 +27,29 @@ export abstract class AbstractFilter {
    */
   abstract call (prices: AssetPrice[]): Promise<AssetPrice[]>
 
+  /**
+   * Purely for logging purposes.
+   * @param {string} message to log
+   */
   log (message: string): void {
     console.log(message)
   }
 
+  /**
+   * Simply warn or to reject some price feed without rejecting all.
+   * @param {string} message to warn
+   */
   warn (message: string): void {
     console.warn(message)
   }
 
+  /**
+   * To be used for rejecting a prices feed completely.
+   * @param {string} message to throw and exit immediately
+   * @throws Error
+   */
   error (message: string): void {
     console.error(message)
     throw new Error(message)
-  }
-}
-
-export class RootFilter extends AbstractFilter {
-  protected readonly filters: AbstractFilter[]
-
-  constructor (network: NetworkName, whale: WhaleApiClient, oracleId: string) {
-    super(network, whale, oracleId)
-    this.filters = [
-      new NonZeroFilter(network, whale, oracleId)
-    ]
-  }
-
-  async call (prices: AssetPrice[]): Promise<AssetPrice[]> {
-    if (prices.length === 0) {
-      this.warn('RootFilter.call prices is empty before filtering')
-      return []
-    }
-
-    for (const filter of this.filters) {
-      prices = await filter.call(prices)
-    }
-
-    if (prices.length === 0) {
-      this.warn('RootFilter.call prices is empty after filtering')
-      return []
-    }
-
-    return prices
   }
 }

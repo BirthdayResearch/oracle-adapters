@@ -23,5 +23,16 @@
       "declaration"
     ],
     "import/no-default-export": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "adapters/src/*.ts"
+      ],
+      "rules": {
+        "import/no-default-export": "off",
+        "import/prefer-default-export": "error"
+      }
+    }
+  ]
 }
