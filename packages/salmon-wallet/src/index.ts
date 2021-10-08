@@ -19,8 +19,8 @@ export class SalmonWallet {
     private readonly privateKey: string,
     private readonly network: NetworkName,
     private readonly client: WhaleApiClient,
-    private readonly classic = new WalletClassic(WIF.asEllipticPair(privateKey)),
-    private readonly account = new WhaleWalletAccount(client, classic, getNetwork(network))
+    private readonly wallet = new WalletClassic(WIF.asEllipticPair(privateKey)),
+    private readonly account = new WhaleWalletAccount(client, wallet, getNetwork(network))
   ) {
   }
 

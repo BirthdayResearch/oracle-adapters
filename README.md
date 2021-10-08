@@ -26,22 +26,20 @@ responsibility design pattern, it is configured with the network, whale client, 
 receives a list of prices for filtering. Once filtered, it can accept, warn, reject partial by filtering or rejecting
 all.
 
-This approach allows all filtering and data manipulation to be carried out in a separate manner without singular scope.
+This approach allows all filtering and data manipulation to be carried out in a separate manner within a singular scope.
 Using the chain of responsibility design pattern, the filter only needs to be responsible for its filtering logic.
 
-This filter logic can be greatly expanded to category more data pruning and cleaning processes with all sorts of
-integration capabilities.
+This filter logic can be greatly expanded to many categories for more data pruning and cleaning processes with all sorts
+of integration capabilities.
 
-### [@defichain/salmon-runner](./packages/salmon-runner)
+### [@defichain/salmon](./packages/salmon)
 
-SalmonRunner to run the prices through a filter and pushes it into SalmonWallet.
+A modular PriceFeed publisher to push prices through a filter and publish it into SalmonWallet.
 
-There are 3 lifecycles of SalmonRunner; setup, filter, and publish. Additionally, prior to running SalmonRunner, you
-fetch the price feed from an adapter and push it to SalmonRunner.
-
-1. Setup reads the env configs, initializes the instances and client.
-2. Filter reads the price feed data and decides whether to alter, accept or reject it.
-3. Publish finally broadcast the accepted prices data.
+0. Prior - fetch the price feed from an adapter and pushes it to a Salmon instance.
+1. Setup - reads the env configs, initialize the instances and client.
+2. Filter - reads the price feed data and decide whether to alter, accept or reject it.
+3. Publish - finally broadcast the accepted prices' data.
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
@@ -55,14 +53,17 @@ connected network.
 ## Usage
 
 ```ts
+import { Salmon, SalmonWallet, WhaleApiClient } from '@defichain/salmon'
 import coingecko from 'coingecko'
-import { push } from '@defichain/salmon-runner'
 
 /**
  * As simple as coingecko() to get prices and push to publish.
  */
 async function main (): Promise<void> {
-  await push(await coingecko())
+  const client = new WhaleApiClient()
+  const wallet = new SalmonWallet()
+  const salmon = new Salmon('oracleId', 'mainnet', client, wallet)
+  await salmon.publish(await coingecko())
 }
 ```
 

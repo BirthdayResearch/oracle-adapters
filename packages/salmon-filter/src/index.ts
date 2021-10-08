@@ -10,10 +10,17 @@ import { WhaleApiClient } from '@defichain/whale-api-client'
 export class SalmonFilter extends AbstractFilter {
   protected readonly filters: AbstractFilter[]
 
-  constructor (network: NetworkName, whale: WhaleApiClient, oracleId: string) {
+  /**
+   * @param {NetworkName} network
+   * @param {WhaleApiClient} whale
+   * @param {string} oracleId
+   * @param {AbstractFilter} additionalFilters to use
+   */
+  constructor (network: NetworkName, whale: WhaleApiClient, oracleId: string, additionalFilters: AbstractFilter[] = []) {
     super(network, whale, oracleId)
     this.filters = [
-      new NonPositiveFilter(network, whale, oracleId)
+      new NonPositiveFilter(network, whale, oracleId),
+      ...additionalFilters
     ]
   }
 
