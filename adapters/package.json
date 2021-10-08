@@ -1,0 +1,30 @@
+{
+  "private": false,
+  "name": "@defichain/oracle-adapters",
+  "version": "0.0.0",
+  "repository": "DeFiCh/oracle-adapters",
+  "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "DeFiChain Foundation",
+      "email": "engineering@defichain.com",
+      "url": "https://defichain.com/"
+    },
+    {
+      "name": "DeFi Blockchain Contributors"
+    },
+    {
+      "name": "Oracle Adapters Contributors"
+    }
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b ./tsconfig.build.json"
+  },
+  "dependencies": {
+    "@defichain/salmon-fetch": "0.0.0"
+  }
+}
