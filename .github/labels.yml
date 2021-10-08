@@ -59,8 +59,13 @@
   name: area/adapters
 # Area - Packages
 - color: fbca04
-  name: area/salmon-core
-
+  name: area/salmon-fetch
+- color: fbca04
+  name: area/salmon-filter
+- color: fbca04
+  name: area/salmon-runner
+- color: fbca04
+  name: area/salmon-wallet
 
 # Priority
 - color: d93f0b

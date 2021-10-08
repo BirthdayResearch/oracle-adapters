@@ -38,7 +38,10 @@ issue:
         - core
         - workflow
         - adapters
-        - salmon-core
+        - salmon-fetch
+        - salmon-filter
+        - salmon-runner
+        - salmon-wallet
       multiple: true
       needs:
         comment: |
