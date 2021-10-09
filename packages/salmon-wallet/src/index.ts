@@ -29,8 +29,9 @@ export class SalmonWallet {
    *
    * @param {string} oracleId of the oracle to submit prices to
    * @param {AssetPrice[]} prices to submit to the blockchain
+   * @return {string} txid
    */
-  public async send (oracleId: string, prices: AssetPrice[]): Promise<void> {
+  public async send (oracleId: string, prices: AssetPrice[]): Promise<string> {
     const change = await this.account.getScript()
     const data = SalmonWallet.createSetOracleData(oracleId, prices)
 
@@ -39,7 +40,7 @@ export class SalmonWallet {
       .oracles.setOracleData(data, change)
 
     const hex = new CTransactionSegWit(signed).toHex()
-    await this.client.rawtx.send({ hex: hex })
+    return await this.client.rawtx.send({ hex: hex })
   }
 
   private static createSetOracleData (oracleId: string, prices: AssetPrice[]): SetOracleData {

@@ -39,8 +39,9 @@ export class Salmon {
 
   /**
    * @param {AssetPrice} prices to push
+   * @return {string | undefined} txid if successfully published
    */
-  async publish (prices: AssetPrice[]): Promise<void> {
+  async publish (prices: AssetPrice[]): Promise<string | undefined> {
     prices = await this.filter.call(prices)
 
     // If RootFilter return empty prices, we can safely exit.
@@ -49,6 +50,6 @@ export class Salmon {
     }
 
     // Else we can broadcast the prices.
-    await this.wallet.send(this.oracleId, prices)
+    return await this.wallet.send(this.oracleId, prices)
   }
 }
