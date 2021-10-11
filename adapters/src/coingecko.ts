@@ -12,8 +12,8 @@ const MAPPING: Record<string, string> = {
   USDC: 'usd-coin'
 }
 
-export default async function (): Promise<AssetPrice[]> {
-  const ids = Object.values(MAPPING)
+export default async function (symbols: string[]): Promise<AssetPrice[]> {
+  const ids = symbols.map(symbol => MAPPING[symbol])
   const res = await fetchAsJson(`${URL}?ids=${ids.join(',')}&vs_currencies=usd`)
 
   return Object.entries(MAPPING).map(([internal, external]): AssetPrice => {
