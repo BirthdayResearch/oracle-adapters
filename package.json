@@ -23,12 +23,10 @@
     "node": ">=14.x"
   },
   "scripts": {
-    "clean": "rimraf packages/**/dist adapters/**/dist packages/**/tsconfig.build.tsbuildinfo adapters/**/tsconfig.build.tsbuildinfo",
     "prepare": "husky install",
-    "prebuild": "npm run clean",
     "build": "lerna run build",
     "version": "lerna version $1 --yes --no-push --no-git-tag-version",
-    "publish": "lerna exec -- npm publish --tag latest --access public",
+    "publish": "lerna exec -- npm publish --tag latest --access public --exact",
     "lint": "eslint . --fix",
     "test": "jest --maxWorkers=100%",
     "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4",
