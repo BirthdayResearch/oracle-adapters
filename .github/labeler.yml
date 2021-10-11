@@ -16,6 +16,11 @@ labels:
     matcher:
       files: "adapters/**"
 
+  - label: area/salmon
+    sync: true
+    matcher:
+      files: "packages/salmon/**"
+
   - label: area/salmon-fetch
     sync: true
     matcher:
@@ -25,11 +30,6 @@ labels:
     sync: true
     matcher:
       files: "packages/salmon-filter/**"
-
-  - label: area/salmon-runner
-    sync: true
-    matcher:
-      files: "packages/salmon-runner/**"
 
   - label: area/salmon-wallet
     sync: true
