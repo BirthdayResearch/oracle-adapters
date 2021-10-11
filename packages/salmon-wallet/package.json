@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/whale-api-wallet": "0.11.0",
-    "@defichain/whale-api-client": "0.11.0",
+    "@defichain/whale-api-wallet": "0.11.4",
+    "@defichain/whale-api-client": "0.11.4",
     "@defichain/jellyfish-crypto": "0.46.1",
     "@defichain/jellyfish-network": "0.46.1",
     "@defichain/jellyfish-transaction": "0.46.1",
