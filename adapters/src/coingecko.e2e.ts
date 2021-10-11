@@ -49,7 +49,7 @@ describe('multi price fetch', () => {
     ])
 
     for (const assetPrice of coingeckoPrices) {
-      expect(assetPrice.amount).not.toStrictEqual(new BigNumber(0))
+      expect(assetPrice.amount.toNumber()).toBeGreaterThan(0)
     }
   })
 })
