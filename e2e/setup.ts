@@ -5,18 +5,9 @@ import { GenesisKeys } from '@defichain/testcontainers'
 export const oracleOwner = GenesisKeys[GenesisKeys.length - 1].operator
 export const rpcClient = new PlaygroundRpcClient(new PlaygroundApiClient({ url: 'http://localhost:3002' }))
 
-export async function setupOracle (): Promise<string> {
+export async function setupOracle (symbols: string[]): Promise<string> {
   const oracleId = await exports.client.oracle.appointOracle(exports.oracleOwner.address, [
-    {
-      token: 'TSLA',
-      currency: 'USD'
-    }, {
-      token: 'AAPL',
-      currency: 'USD'
-    }, {
-      token: 'FB',
-      currency: 'USD'
-    }
+    symbols.map(x => ({ token: x, currency: 'USD' }))
   ], {
     weightage: 1.0
   })

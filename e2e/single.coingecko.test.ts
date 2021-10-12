@@ -12,7 +12,7 @@ describe('e2e single coingecko', () => {
       expect(confirms).toBeGreaterThanOrEqual(2)
     }, 10000)
 
-    const oracleId = await setupOracle()
+    const oracleId = await setupOracle(['BTC', 'ETH', 'DOGE'])
 
     const client = new WhaleApiClient({ url: 'http://localhost:3001', network: 'regtest', version: 'v0' })
     const wallet = new SalmonWallet(oracleOwner.privKey, 'regtest', client)
