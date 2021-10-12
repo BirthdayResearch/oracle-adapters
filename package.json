@@ -28,6 +28,7 @@
     "version": "lerna version $1 --yes --no-push --no-git-tag-version",
     "publish": "lerna exec -- npm publish --tag latest --access public --exact",
     "lint": "eslint . --fix",
+    "standard": "eslint . --fix",
     "test": "jest --maxWorkers=100%",
     "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4",
     "test:e2e": "jest --runInBand --config ./jest.config.e2e.js ./e2e/single.*.test.ts",
