@@ -6,14 +6,14 @@ export const oracleOwner = GenesisKeys[GenesisKeys.length - 1].operator
 export const rpcClient = new PlaygroundRpcClient(new PlaygroundApiClient({ url: 'http://localhost:3002' }))
 
 export async function setupOracle (symbols: string[]): Promise<string> {
-  const oracleId = await exports.client.oracle.appointOracle(exports.oracleOwner.address, [
+  const oracleId = await exports.rpcClient.oracle.appointOracle(exports.oracleOwner.address, [
     symbols.map(x => ({ token: x, currency: 'USD' }))
   ], {
     weightage: 1.0
   })
 
   await waitForExpect(async () => {
-    expect((await exports.client.wallet.getTransaction(oracleId)).confirmations).toBeGreaterThanOrEqual(3)
+    expect((await exports.rpcClient.wallet.getTransaction(oracleId)).confirmations).toBeGreaterThanOrEqual(3)
   }, 10000)
 
   return oracleId
