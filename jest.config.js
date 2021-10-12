@@ -10,5 +10,8 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '.*/__tests__/.*'
+  ],
+  testPathIgnorePatterns: [
+    '/e2e/'
   ]
 }

@@ -30,10 +30,12 @@
     "lint": "eslint . --fix",
     "test": "jest --maxWorkers=100%",
     "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4",
+    "test:e2e": "jest --runInBand --config ./jest.config.e2e.js ./e2e/single.*.test.ts",
     "all": "npm run clean && npm run build && npm run lint && npm run test"
   },
   "devDependencies": {
     "@defichain/jellyfish-testing": "^0.46.2",
+    "@defichain/playground-api-client": "^0.10.0",
     "@defichain/testcontainers": "^0.46.2",
     "@types/jest": "^27.0.2",
     "eslint": "^7.32.0",
