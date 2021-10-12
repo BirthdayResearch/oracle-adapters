@@ -75,3 +75,4 @@ jobs:
       - run: .github/workflows/e2e/wait-for http://localhost:19551/ping -t 120
 
       - run: npm run test:e2e
+      
