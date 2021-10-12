@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/no-var-requires */
 import waitForExpect from 'wait-for-expect'
-import { oracleOwner, rpcClient, setupOracle } from './setup'
+import { oracleOwner, rpcClient, setupOracle } from './e2e.module'
 import { Salmon, SalmonWallet, WhaleApiClient } from '@defichain/salmon'
 import coingecko from '../adapters/src/coingecko'
 
