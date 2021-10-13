@@ -13,7 +13,7 @@ export interface AssetPrice {
 }
 
 /**
- * Helper utility to create new AssetPrice with automatic conversion of types to required types.
+ * Helper utility to create new AssetPrice with automatic validation and conversion of types to required types.
  *
  * @param {string} token symbol of the AssetPrice (internal symbol)
  * @param {string | number | BigNumber} price in BigNumber, if string or number it will automatically be converted.
