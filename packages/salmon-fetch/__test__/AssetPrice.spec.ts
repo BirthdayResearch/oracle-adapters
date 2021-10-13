@@ -29,6 +29,14 @@ describe('PriceAsset interface', () => {
     })
   })
 
+  it('should exclude invalid token - not string', () => {
+    const json = JSON.parse('{"test": 12}')
+
+    expect(() => {
+      newAssetPrice(json.test, '$1.00', 'USD', 0)
+    }).toThrowError(Error('token is not string'))
+  })
+
   it('should exclude invalid price - string', () => {
     expect(() => {
       newAssetPrice('APPL', '$1.00', 'USD', 0)
@@ -45,6 +53,14 @@ describe('PriceAsset interface', () => {
     expect(() => {
       newAssetPrice('APPL', new BigNumber(Infinity), 'USD', 0)
     }).toThrowError(Error('price is not string, number of BigNumber'))
+  })
+
+  it('should exclude invalid currency - not string', () => {
+    const json = JSON.parse('{"test": 12}')
+
+    expect(() => {
+      newAssetPrice('APPL', '$1.00', json.test, 0)
+    }).toThrowError(Error('currency is not string'))
   })
 
   it('should include valid timestamp - number', () => {
