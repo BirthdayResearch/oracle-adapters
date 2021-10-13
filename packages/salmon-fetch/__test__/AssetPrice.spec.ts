@@ -59,7 +59,7 @@ describe('PriceAsset interface', () => {
     const json = JSON.parse('{"test": 12}')
 
     expect(() => {
-      newAssetPrice('APPL', '$1.00', json.test, 0)
+      newAssetPrice('APPL', '1', json.test, 0)
     }).toThrowError(Error('currency is not string'))
   })
 
