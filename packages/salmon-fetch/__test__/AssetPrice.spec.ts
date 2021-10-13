@@ -1,73 +1,81 @@
-import nock from 'nock'
 import BigNumber from 'bignumber.js'
-import coingecko from '@defichain/oracle-adapters/src/coingecko'
+import { newAssetPrice } from '@defichain/salmon-fetch'
 
-describe('single asset price fetch', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
+describe('PriceAsset interface', () => {
+  it('should include valid price - string', () => {
+    expect(newAssetPrice('APPL', '1', 'USD', 0)).toStrictEqual({
+      amount: new BigNumber('1'),
+      currency: 'USD',
+      token: 'APPL',
+      timestamp: new BigNumber(0)
+    })
   })
 
-  it('should fetch price from coingecko', async () => {
-    nock('https://api.coingecko.com')
-      .get('/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd')
-      .reply(200, function (_) {
-        return `{
-          "dogecoin":{
-             "usd":0.208377
-          },
-          "ethereum":{
-             "usd":2299.23
-          },
-          "bitcoin":{
-             "usd":39877
-          }
-        }`
-      })
-
-    const prices = await coingecko(['BTC', 'ETH', 'DOGE'])
-    expect(prices[0].token).toStrictEqual('BTC')
-    expect(prices[0].amount).toStrictEqual(new BigNumber('39877'))
-    expect(prices[1].token).toStrictEqual('ETH')
-    expect(prices[1].amount).toStrictEqual(new BigNumber('2299.23'))
-    expect(prices[2].token).toStrictEqual('DOGE')
-    expect(prices[2].amount).toStrictEqual(new BigNumber('0.208377'))
+  it('should include valid price - number', () => {
+    expect(newAssetPrice('APPL', 1, 'USD', 0)).toStrictEqual({
+      amount: new BigNumber(1),
+      currency: 'USD',
+      token: 'APPL',
+      timestamp: new BigNumber(0)
+    })
   })
 
-  it('should fetch price from coingecko - override', async () => {
-    nock('https://api.coingecko.com')
-      .get('/api/v3/simple/price?ids=dogecoin,ethereum&vs_currencies=usd')
-      .reply(200, function (_) {
-        return {
-          dogecoin: {
-            usd: '0.208377'
-          },
-          ethereum: {
-            usd: new BigNumber('2299.23')
-          }
-        }
-      })
-
-    const prices = await coingecko(['DOGE', 'ETH'])
-    expect(prices[0].token).toStrictEqual('DOGE')
-    expect(prices[0].amount).toStrictEqual(new BigNumber('0.208377'))
-    expect(prices[1].token).toStrictEqual('ETH')
-    expect(prices[1].amount).toStrictEqual(new BigNumber('2299.23'))
+  it('should include valid price - BigNumber', () => {
+    expect(newAssetPrice('APPL', new BigNumber('1'), 'USD', 0)).toStrictEqual({
+      amount: new BigNumber('1'),
+      currency: 'USD',
+      token: 'APPL',
+      timestamp: new BigNumber(0)
+    })
   })
 
-  it('should fail to fetch price from coingecko - override', async () => {
-    nock('https://api.coingecko.com')
-      .get('/api/v3/simple/price?ids=dogecoin&vs_currencies=usd')
-      .reply(200, function (_) {
-        return {
-          dogecoin: {
-            usd: 'AB'
-          }
-        }
-      })
-
-    expect(async () => {
-      await coingecko(['DOGE'])
+  it('should exclude invalid price - string', () => {
+    expect(() => {
+      newAssetPrice('APPL', '$1.00', 'USD', 0)
     }).toThrowError(Error('price is not string, number of BigNumber'))
+  })
+
+  it('should exclude invalid price - NaN', () => {
+    expect(() => {
+      newAssetPrice('APPL', new BigNumber(NaN), 'USD', 0)
+    }).toThrowError(Error('price is not string, number of BigNumber'))
+  })
+
+  it('should exclude invalid price - Infinity', () => {
+    expect(() => {
+      newAssetPrice('APPL', new BigNumber(Infinity), 'USD', 0)
+    }).toThrowError(Error('price is not string, number of BigNumber'))
+  })
+
+  it('should include valid timestamp - number', () => {
+    const timestamp = Date.now()
+    expect(newAssetPrice('APPL', 1, 'USD', timestamp)).toStrictEqual({
+      amount: new BigNumber(1),
+      currency: 'USD',
+      token: 'APPL',
+      timestamp: new BigNumber(timestamp)
+    })
+  })
+
+  it('should include valid timestamp - BigNumber', () => {
+    const timestamp = Date.now()
+    expect(newAssetPrice('APPL', 1, 'USD', new BigNumber(timestamp))).toStrictEqual({
+      amount: new BigNumber(1),
+      currency: 'USD',
+      token: 'APPL',
+      timestamp: new BigNumber(timestamp)
+    })
+  })
+
+  it('should exclude invalid timestamp - NaN', () => {
+    expect(() => {
+      newAssetPrice('APPL', '1', 'USD', new BigNumber(NaN))
+    }).toThrowError(Error('timestamp is not number or BigNumber'))
+  })
+
+  it('should exclude invalid timestamp - Infinity', () => {
+    expect(() => {
+      newAssetPrice('APPL', '1', 'USD', new BigNumber(Infinity))
+    }).toThrowError(Error('timestamp is not number or BigNumber'))
   })
 })
