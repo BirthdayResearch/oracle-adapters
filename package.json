@@ -2,19 +2,6 @@
   "name": "oracle-adapters",
   "private": true,
   "license": "MIT",
-  "contributors": [
-    {
-      "name": "DeFiChain Foundation",
-      "email": "engineering@defichain.com",
-      "url": "https://defichain.com/"
-    },
-    {
-      "name": "DeFi Blockchain Contributors"
-    },
-    {
-      "name": "DeFiChain Oracle Adapters Contributors"
-    }
-  ],
   "workspaces": [
     "./adapters",
     "./packages/*"
