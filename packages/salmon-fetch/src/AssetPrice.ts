@@ -42,20 +42,28 @@ export function newAssetPrice (token: string, price: string | number | BigNumber
 
 function isPriceValid (price: string | number | BigNumber): boolean {
   const amount = BigNumber.isBigNumber(price) ? price : new BigNumber(price)
-  if (BigNumber.isBigNumber(amount)) {
-    if (!amount.isNaN() && amount.isFinite()) {
-      return true
-    }
+
+  if (!BigNumber.isBigNumber(amount)) {
+    return false
   }
-  return false
+
+  if (amount.isNaN()) {
+    return false
+  }
+
+  return amount.isFinite()
 }
 
 function isTimestampValid (timestamp: number | BigNumber): boolean {
   const timestampBN = BigNumber.isBigNumber(timestamp) ? timestamp : new BigNumber(timestamp)
-  if (BigNumber.isBigNumber(timestampBN)) {
-    if (!timestampBN.isNaN() && timestampBN.isFinite()) {
-      return true
-    }
+
+  if (!BigNumber.isBigNumber(timestampBN)) {
+    return false
   }
-  return false
+
+  if (timestampBN.isNaN()) {
+    return false
+  }
+
+  return timestampBN.isFinite()
 }
