@@ -1,18 +1,23 @@
 /* eslint-disable  @typescript-eslint/no-var-requires */
 import waitForExpect from 'wait-for-expect'
-import { oracleOwner, rpcClient, setupOracle } from './e2e.module'
+import { setupOracle } from './e2e.module'
 import { Salmon, SalmonWallet, WhaleApiClient } from '@defichain/salmon'
 import coingecko from '../adapters/src/coingecko'
+import { PlaygroundRpcClient, PlaygroundApiClient } from '@defichain/playground-api-client'
+import { GenesisKeys } from '@defichain/testcontainers'
 
 describe('e2e single coingecko', () => {
   it('should run coingecko salmon runner', async () => {
+    const rpcClient = new PlaygroundRpcClient(new PlaygroundApiClient({ url: 'http://localhost:3002' }))
+    const oracleOwner = GenesisKeys[GenesisKeys.length - 1].operator
+
     const txid = await rpcClient.wallet.sendToAddress(oracleOwner.address, 1)
     await waitForExpect(async () => {
       const confirms = (await rpcClient.wallet.getTransaction(txid)).confirmations
       expect(confirms).toBeGreaterThanOrEqual(2)
     }, 10000)
 
-    const oracleId = await setupOracle(['BTC', 'ETH', 'DOGE'])
+    const oracleId = await setupOracle(rpcClient, oracleOwner, ['BTC', 'ETH', 'DOGE'])
 
     const client = new WhaleApiClient({ url: 'http://localhost:3001', network: 'regtest', version: 'v0' })
     const wallet = new SalmonWallet(oracleOwner.privKey, 'regtest', client)
