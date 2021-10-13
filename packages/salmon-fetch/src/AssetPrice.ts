@@ -24,8 +24,16 @@ export interface AssetPrice {
  * @throws Error if timestamp is not number or BigNumber
  */
 export function newAssetPrice (token: string, price: string | number | BigNumber, currency: string, timestamp: number | BigNumber): AssetPrice {
+  if (typeof token !== 'string') {
+    throw new Error('token is not string')
+  }
+
   if (!isPriceValid(price)) {
     throw new Error('price is not string, number of BigNumber')
+  }
+
+  if (typeof currency !== 'string') {
+    throw new Error('currency is not string')
   }
 
   if (!isTimestampValid(timestamp)) {
@@ -40,6 +48,12 @@ export function newAssetPrice (token: string, price: string | number | BigNumber
   }
 }
 
+/**
+ * isPriceValid rejects price if it cannot be converted to BigNumber, or timestamp is Nan, or timestamp is not finite.
+ * @param {string | number | BigNumber} price of the AssetPrice
+ *
+ * @return true if price is a well-formed BigNumber and not Nan or infinite
+ */
 function isPriceValid (price: string | number | BigNumber): boolean {
   const amount = BigNumber.isBigNumber(price) ? price : new BigNumber(price)
 
@@ -54,6 +68,12 @@ function isPriceValid (price: string | number | BigNumber): boolean {
   return amount.isFinite()
 }
 
+/**
+ * isTimestampValid rejects timestamp if it cannot be converted to BigNumber, or timestamp is Nan, or timestamp is not finite.
+ * @param {number | BigNumber} timestamp of the AssetPrice
+ *
+ * @return true if timestamp is a well-formed BigNumber and not Nan or infinite
+ */
 function isTimestampValid (timestamp: number | BigNumber): boolean {
   const timestampBN = BigNumber.isBigNumber(timestamp) ? timestamp : new BigNumber(timestamp)
 
