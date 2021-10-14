@@ -18,7 +18,7 @@ export interface AssetPrice {
  * @param {string} token symbol of the AssetPrice (internal symbol)
  * @param {string | number | BigNumber} price in BigNumber, if string or number it will automatically be converted.
  * @param {string} currency of AssetPrice
- * @param {number | BigNumber} timestamp (seconds) in BigNumber, if number it will automatically be converted. If datetime is in string, Date.parse(datetime).toNumber() could be used.
+ * @param {number | BigNumber} timestamp (milliseconds since epoch) in BigNumber, if number it will automatically be converted. If datetime is in string, Date.parse(datetime).toNumber() could be used.
  *
  * @throws Error if price is not string or BigNumber
  * @throws Error if timestamp is not number or BigNumber
