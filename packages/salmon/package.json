@@ -5,19 +5,6 @@
   "repository": "DeFiCh/oracle-adapters",
   "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
   "license": "MIT",
-  "contributors": [
-    {
-      "name": "DeFiChain Foundation",
-      "email": "engineering@defichain.com",
-      "url": "https://defichain.com/"
-    },
-    {
-      "name": "DeFi Blockchain Contributors"
-    },
-    {
-      "name": "Oracle Adapters Contributors"
-    }
-  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -30,8 +17,8 @@
     "@defichain/salmon-fetch": "0.0.0",
     "@defichain/salmon-filter": "0.0.0",
     "@defichain/salmon-wallet": "0.0.0",
-    "@defichain/whale-api-client": ">=0.11.4",
-    "@defichain/jellyfish-network": ">=0.47.0"
+    "@defichain/whale-api-client": "0.11.4",
+    "@defichain/jellyfish-network": "0.47.0"
   },
   "devDependencies": {
   }

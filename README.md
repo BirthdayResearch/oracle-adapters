@@ -4,7 +4,7 @@
 
 ## Technical Design
 
-DeFiChain Oracle Adapters follows a mono-repo design with two distinct aspects, packages, and adapters. Packages
+DeFiChain Oracle Adapters follows a mono-repo design with two distinct sections: salmon packages, and adapters. Packages
 represent each module component of the oracle system with a runner. Adapters are a data-only, price feed fetcher that
 conforms to the specification of `packages/salmon-fetch`.
 
@@ -12,6 +12,19 @@ conforms to the specification of `packages/salmon-fetch`.
 
 Featuring a collection of Oracle Price Feed adapters. Powered with `@defichain/salmon-fetch` it fetches data and
 transforms it into a list of `AssetPrice` for publishing.
+
+## The Salmon Framework
+
+A runner agnostic ephemeral oracle publishing framework. Each module component represent a modular subsystem of salmon.
+
+### [@defichain/salmon](./packages/salmon)
+
+A modular PriceFeed publisher to push prices through a filter and publish it into SalmonWallet.
+
+0. Prior - fetch the price feed from an adapter and pushes it to a Salmon instance.
+1. Setup - reads the env configs, initialize the instances and client.
+2. Filter - reads the price feed data and decide whether to alter, accept or reject it.
+3. Publish - finally broadcast the accepted prices' data.
 
 ### [@defichain/salmon-fetch](./packages/salmon-fetch)
 
@@ -31,15 +44,6 @@ Using the chain of responsibility design pattern, the filter only needs to be re
 
 This filter logic can be greatly expanded to many categories for more data pruning and cleaning processes with all sorts
 of integration capabilities.
-
-### [@defichain/salmon](./packages/salmon)
-
-A modular PriceFeed publisher to push prices through a filter and publish it into SalmonWallet.
-
-0. Prior - fetch the price feed from an adapter and pushes it to a Salmon instance.
-1. Setup - reads the env configs, initialize the instances and client.
-2. Filter - reads the price feed data and decide whether to alter, accept or reject it.
-3. Publish - finally broadcast the accepted prices' data.
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
