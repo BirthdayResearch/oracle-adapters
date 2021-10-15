@@ -9,42 +9,50 @@ describe('multi price fetch', () => {
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'BTC'
+        token: 'BTC',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'DFI'
+        token: 'DFI',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'ETH'
+        token: 'ETH',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'DOGE'
+        token: 'DOGE',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'BCH'
+        token: 'BCH',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'LTC'
+        token: 'LTC',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'USDT'
+        token: 'USDT',
+        timestamp: expect.any(BigNumber)
       },
       {
         amount: expect.any(BigNumber),
         currency: 'USD',
-        token: 'USDC'
+        token: 'USDC',
+        timestamp: expect.any(BigNumber)
       }
     ])
 
