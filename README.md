@@ -45,6 +45,10 @@ Using the chain of responsibility design pattern, the filter only needs to be re
 This filter logic can be greatly expanded to many categories for more data pruning and cleaning processes with all sorts
 of integration capabilities.
 
+### [@defichain/salmon-testing](./packages/salmon-testing)
+
+Providing the e2e testing capability for salmon framework. Pulls a docker container and setups whale.
+
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
 SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by DeFiCh/jellyfish
