@@ -18,6 +18,7 @@
     "@defichain/testcontainers": "0.47.0",
     "testcontainers": "^7.21.0"
   },
-  "devDependencies": {
+  "peerDependencies": {
+    "@defichain/salmon-core": "0.0.0"
   }
 }

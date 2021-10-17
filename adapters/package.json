@@ -13,5 +13,8 @@
   },
   "dependencies": {
     "@defichain/salmon-fetch": "0.0.0"
+  },
+  "peerDependencies": {
+    "@defichain/salmon-core": "0.0.0"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "oracle-adapters",
+  "name": "@defich/oracle-adapters",
   "private": true,
   "license": "MIT",
   "workspaces": [
@@ -8,13 +8,12 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "build": "lerna run build",
-    "version": "lerna version $1 --yes --no-push --no-git-tag-version",
-    "publish": "lerna exec -- npm publish --tag latest --access public --exact",
+    "build": "lerna run --scope '@defichain/*' build",
+    "version:set": "lerna version $1 --yes --no-push --no-git-tag-version --exact",
+    "publish:latest": "lerna exec -- npm publish --tag latest --access public",
     "lint": "eslint . --fix",
     "test": "jest --maxWorkers=100%",
-    "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4",
-    "all": "npm run clean && npm run build && npm run lint && npm run test"
+    "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4"
   },
   "devDependencies": {
     "@defichain/jellyfish-testing": "0.47.0",
