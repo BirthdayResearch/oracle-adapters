@@ -1,6 +1,6 @@
 # DeFiChain Oracle Adapters (The Salmon Project)
 
-> Mono-repo for DeFiChain Oracle Adapters.
+> Mono-repo for DeFiChain Oracle Adapters. Next generation implementation replacing existing [`DeFiCh/salmon`](https://github.com/DeFiCh/salmon).
 
 ## Technical Design
 
@@ -44,6 +44,11 @@ Using the chain of responsibility design pattern, the filter only needs to be re
 
 This filter logic can be greatly expanded to many categories for more data pruning and cleaning processes with all sorts
 of integration capabilities.
+
+### [@defichain/salmon-testing](./packages/salmon-testing)
+
+Providing the e2e testing capability for salmon framework. This package is a Whale + Ain Masternode RegTest Container
+that automatically setup a `network` and connects `ain` and `whale` together providing a `WhaleApiClient` for testing.
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
