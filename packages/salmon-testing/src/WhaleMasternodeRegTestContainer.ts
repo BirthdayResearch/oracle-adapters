@@ -24,8 +24,9 @@ export class WhaleMasternodeRegTestContainer {
       user: 'whale',
       password: 'whale'
     })
-
     await this.docker.getNetwork(network.getId()).connect({ Container: this.ain.id })
+    await this.ain.restart()
+
     const ip = await this.ain.getIp(network.getName())
     this.whale = await new GenericContainer('ghcr.io/defich/whale:' + version)
       .withNetworkMode(network.getName())
