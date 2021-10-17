@@ -33,7 +33,7 @@ jobs:
 
       - name: find and replace peerDependencies # because lerna doesn't update peers deps
         run: |
-          find packages/*/package.json adapters/package.json -type f -exec sed -i '' 's#    "@defichain/salmon-core": "0.0.0"#    "@defichain/salmon-core": "${{ steps.version.outputs.result }}"#g' {} \;
+          find packages/*/package.json adapters/package.json -type f -exec sed -i 's#    "@defichain/salmon-core": "0.0.0"#    "@defichain/salmon-core": "${{ steps.version.outputs.result }}"#g' {} \;
 
       - name: Publish
         run: |
