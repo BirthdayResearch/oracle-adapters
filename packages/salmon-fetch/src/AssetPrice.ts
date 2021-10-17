@@ -24,7 +24,7 @@ export interface AssetPrice {
  * @throws Error if timestamp is not number or BigNumber
  */
 export function newAssetPrice (token: string, price: string | number | BigNumber, currency: string, timestamp: number | BigNumber): AssetPrice {
-  if (typeof token !== 'string') {
+  if (typeof token as any !== 'string') {
     throw new Error('token is not string')
   }
 
@@ -32,7 +32,7 @@ export function newAssetPrice (token: string, price: string | number | BigNumber
     throw new Error('price is not string, number of BigNumber')
   }
 
-  if (typeof currency !== 'string') {
+  if (typeof currency as any !== 'string') {
     throw new Error('currency is not string')
   }
 
