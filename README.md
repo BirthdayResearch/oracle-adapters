@@ -1,6 +1,6 @@
 # DeFiChain Oracle Adapters (The Salmon Project)
 
-> Mono-repo for DeFiChain Oracle Adapters.
+> Mono-repo for DeFiChain Oracle Adapters. Next generation implementation replacing existing [`DeFiCh/salmon`](https://github.com/DeFiCh/salmon).
 
 ## Technical Design
 
