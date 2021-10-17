@@ -2,7 +2,7 @@ import { AbstractFilter } from '../AbstractFilter'
 import { AssetPrice } from '@defichain/salmon-fetch'
 
 /**
- * AmountFilter checks if any prices are valid, non-positive (negative or zero).
+ * AmountFilter checks if any prices are invalid, non-positive (negative or zero), non-finite.
  * This filter rejects all prices if any prices fit the condition.
  */
 export class AmountFilter extends AbstractFilter {
