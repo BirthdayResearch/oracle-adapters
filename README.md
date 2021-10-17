@@ -47,7 +47,8 @@ of integration capabilities.
 
 ### [@defichain/salmon-testing](./packages/salmon-testing)
 
-Providing the e2e testing capability for salmon framework. Pulls a docker container and setups whale.
+Providing the e2e testing capability for salmon framework. This package is a Whale + Ain Masternode RegTest Container
+that automatically setup a `network` and connects `ain` and `whale` together providing a `WhaleApiClient` for testing.
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 

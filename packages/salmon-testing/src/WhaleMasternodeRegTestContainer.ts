@@ -41,9 +41,10 @@ export class WhaleMasternodeRegTestContainer {
   async stop (): Promise<void> {
     await Promise.all([
       this.ain.stop(),
-      this.whale?.stop(),
-      this.network?.stop()
+      this.whale?.stop()
     ])
+
+    await this.network?.stop()
   }
 
   /**
