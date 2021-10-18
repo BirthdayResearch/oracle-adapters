@@ -2,7 +2,7 @@ import { JsonRpcClient } from '@defichain/jellyfish-api-jsonrpc'
 import { GenesisKeys } from '@defichain/testcontainers'
 import { WhaleMasternodeRegTestContainer } from '@defichain/salmon-testing'
 import { SalmonWallet } from '@defichain/salmon-wallet'
-import { AssetPrice, BigNumber, Salmon, WhaleApiClient } from '@defichain/salmon'
+import { AssetPrice, BigNumber, Salmon, WhaleApiClient } from '../src'
 
 const container = new WhaleMasternodeRegTestContainer()
 let client: JsonRpcClient
