@@ -1,6 +1,6 @@
 {
   "private": false,
-  "name": "@defichain/salmon-filter",
+  "name": "@defichain/salmon-testing",
   "version": "0.0.0",
   "repository": "DeFiCh/oracle-adapters",
   "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
@@ -14,9 +14,9 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/jellyfish-network": "0.47.0",
-    "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/whale-api-client": "0.11.4"
+    "@defichain/testcontainers": "0.47.0",
+    "@defichain/whale-api-client": "0.11.4",
+    "testcontainers": "^7.21.0"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"

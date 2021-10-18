@@ -65,6 +65,8 @@
 - color: fbca04
   name: area/salmon-filter
 - color: fbca04
+  name: area/salmon-testing
+- color: fbca04
   name: area/salmon-wallet
 
 # Priority

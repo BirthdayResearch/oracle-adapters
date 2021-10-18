@@ -41,6 +41,7 @@ issue:
         - salmon
         - salmon-fetch
         - salmon-filter
+        - salmon-testing
         - salmon-wallet
       multiple: true
       needs:

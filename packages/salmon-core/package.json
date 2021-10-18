@@ -1,0 +1,14 @@
+{
+  "private": false,
+  "name": "@defichain/salmon-core",
+  "version": "0.0.0",
+  "repository": "DeFiCh/oracle-adapters",
+  "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [],
+  "dependencies": {
+    "defichain": "0.0.1"
+  }
+}

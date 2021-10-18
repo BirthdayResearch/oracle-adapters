@@ -1,4 +1,4 @@
-import { NonPositiveFilter } from './filters/NonPositiveFilter'
+import { AmountFilter } from './filters/AmountFilter'
 import { AssetPrice } from '@defichain/salmon-fetch'
 import { AbstractFilter } from './AbstractFilter'
 import { NetworkName } from '@defichain/jellyfish-network'
@@ -19,7 +19,7 @@ export class SalmonFilter extends AbstractFilter {
   constructor (network: NetworkName, whale: WhaleApiClient, oracleId: string, additionalFilters: AbstractFilter[] = []) {
     super(network, whale, oracleId)
     this.filters = [
-      new NonPositiveFilter(network, whale, oracleId),
+      new AmountFilter(network, whale, oracleId),
       ...additionalFilters
     ]
   }
