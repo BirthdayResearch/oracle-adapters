@@ -2,8 +2,8 @@ import { AbstractFilter } from '../AbstractFilter'
 import { AssetPrice } from '@defichain/salmon-fetch'
 
 /**
- * AmountFilter checks if any prices are invalid, non-positive (negative or zero), non-finite.
- * This filter rejects all prices if any prices fit the condition.
+ * AmountFilter checks if any amount is invalid, non-positive (negative or zero), non-finite.
+ * This filter rejects the amount if it fit any condition.
  */
 export class AmountFilter extends AbstractFilter {
   async call (prices: AssetPrice[]): Promise<AssetPrice[]> {
@@ -18,7 +18,7 @@ export class AmountFilter extends AbstractFilter {
 }
 
 /**
- * Asset cannot be traded at this value, error and reject all prices.
+ * Assets with an amount at this value or error cannot be traded and is rejected.
  *
  * @return boolean
  */

@@ -2,8 +2,8 @@ import { AbstractFilter } from '../AbstractFilter'
 import { AssetPrice } from '@defichain/salmon-fetch'
 
 /**
- * TokenFilter checks if any tokens are invalid or undefined
- * This filter rejects all tokens if any they fit the condition.
+ * TokenFilter checks if any token is invalid, is an empty string
+ * This filter rejects the token if it fit any condition.
  */
 export class TokenFilter extends AbstractFilter {
   async call (prices: AssetPrice[]): Promise<AssetPrice[]> {
@@ -18,7 +18,7 @@ export class TokenFilter extends AbstractFilter {
 }
 
 /**
- * Assets with tokens with this value cannot be traded and will be rejected.
+ * Assets with a token with this value cannot be traded and will be rejected.
  *
  * @return boolean
  */
