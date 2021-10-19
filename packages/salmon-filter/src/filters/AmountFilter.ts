@@ -3,7 +3,7 @@ import { AssetPrice } from '@defichain/salmon-fetch'
 
 /**
  * AmountFilter checks if any amount is invalid, non-positive (negative or zero), non-finite.
- * This filter rejects the amount if it fit any condition.
+ * This filter rejects all assets if any amount fits a condition.
  */
 export class AmountFilter extends AbstractFilter {
   async call (prices: AssetPrice[]): Promise<AssetPrice[]> {
