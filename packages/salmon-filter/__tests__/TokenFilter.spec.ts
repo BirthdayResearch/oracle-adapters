@@ -45,6 +45,58 @@ it('should error on string with only whitespaces', async () => {
   }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
+it('should error on string with whitespaces (start)', async () => {
+  await expect(async () => {
+    await filter.call([
+      {
+        token: 'TSLA ',
+        amount: new BigNumber(1),
+        currency: 'USD',
+        timestamp: new BigNumber('1634483733000')
+      }
+    ])
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
+})
+
+it('should error on string with whitespaces (end)', async () => {
+  await expect(async () => {
+    await filter.call([
+      {
+        token: 'TSLA ',
+        amount: new BigNumber(1),
+        currency: 'USD',
+        timestamp: new BigNumber('1634483733000')
+      }
+    ])
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
+})
+
+it('should error on string with whitespaces (start & end)', async () => {
+  await expect(async () => {
+    await filter.call([
+      {
+        token: 'TSLA ',
+        amount: new BigNumber(1),
+        currency: ' USD',
+        timestamp: new BigNumber('1634483733000')
+      }
+    ])
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
+})
+
+it('should error on string with whitespaces (in-between)', async () => {
+  await expect(async () => {
+    await filter.call([
+      {
+        token: 'TS LA ',
+        amount: new BigNumber(1),
+        currency: 'USD',
+        timestamp: new BigNumber('1634483733000')
+      }
+    ])
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
+})
+
 it('should allow TSLA', async () => {
   await filter.call([
     {

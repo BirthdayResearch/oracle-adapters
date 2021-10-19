@@ -2,7 +2,7 @@ import { AbstractFilter } from '../AbstractFilter'
 import { AssetPrice } from '@defichain/salmon-fetch'
 
 /**
- * TokenFilter checks if any token is invalid, is an empty string
+ * TokenFilter checks if any token is invalid, is an empty string, contains whitespaces
  * This filter rejects all assets if any token fit a condition.
  */
 export class TokenFilter extends AbstractFilter {
@@ -23,5 +23,9 @@ export class TokenFilter extends AbstractFilter {
  * @return boolean
  */
 function isInvalid (price: AssetPrice): boolean {
+  if (price.token.includes(' ')) {
+    return true
+  }
+
   return price.token.trim().length === 0
 }
