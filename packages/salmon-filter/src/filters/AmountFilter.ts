@@ -18,7 +18,7 @@ export class AmountFilter extends AbstractFilter {
 }
 
 /**
- * Assets with an amount at this value or error cannot be traded and is rejected.
+ * Assets with an amount of this value or error cannot be traded and is rejected.
  *
  * @return boolean
  */

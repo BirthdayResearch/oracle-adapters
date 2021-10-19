@@ -18,7 +18,7 @@ export class TokenFilter extends AbstractFilter {
 }
 
 /**
- * Assets with a token with this value cannot be traded and will be rejected.
+ * Assets with a token of this value cannot be traded and will be rejected.
  *
  * @return boolean
  */
