@@ -176,7 +176,7 @@ it('should fail on invalid oracle id', async () => {
   const prices: AssetPrice[] = [
     {
       token: 'BTC',
-      amount: new BigNumber(NaN),
+      amount: new BigNumber(1),
       currency: 'USD',
       timestamp: new BigNumber(Date.now())
     }
