@@ -180,8 +180,8 @@ describe('default TimestampFilter', () => {
     ])
   })
 
-  it('should allow 55 mins into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 55)
+  it('should allow 59 mins into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 59)
 
     await filter.call([
       {
@@ -426,8 +426,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     ])
   })
 
-  it('should allow 25 week into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 25)
+  it('should allow 29 mins into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 29)
 
     await filter.call([
       {
