@@ -180,34 +180,8 @@ describe('default TimestampFilter', () => {
     ])
   })
 
-  it('should allow 1 week into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7)
-
-    await filter.call([
-      {
-        token: 'TSLA',
-        amount: new BigNumber(1),
-        currency: 'USD',
-        timestamp: timestamp
-      }
-    ])
-  })
-
-  it('should allow 2 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 2)
-
-    await filter.call([
-      {
-        token: 'TSLA',
-        amount: new BigNumber(1),
-        currency: 'USD',
-        timestamp: timestamp
-      }
-    ])
-  })
-
-  it('should allow 3 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 3)
+  it('should allow 55 mins into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 55)
 
     await filter.call([
       {
@@ -239,7 +213,7 @@ describe('default TimestampFilter', () => {
   })
 })
 
-describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 1 week)', () => {
+describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)', () => {
   beforeAll(async () => {
     await container.start()
 
@@ -248,7 +222,7 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 1 week)',
     const oracleId = '0000000000000000000000000000000000000000000000000000000000000000'
 
     const maxAge = new BigNumber(1000 * 60 * 60 * 24 * 7 * 2)
-    const minAge = new BigNumber(1000 * 60 * 60 * 24 * 7).negated()
+    const minAge = new BigNumber(1000 * 60 * 30).negated()
 
     filter = new TimestampFilter(network, client, oracleId, {
       maxAge: maxAge,
@@ -355,8 +329,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 1 week)',
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
   })
 
-  it('should error on more than 1 week into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus((1000 * 60 * 60 * 24 * 7) + 1)
+  it('should error on 35 mins into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 35)
 
     await expect(async () => {
       await filter.call([
@@ -452,8 +426,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 1 week)',
     ])
   })
 
-  it('should allow 1 week into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7)
+  it('should allow 25 week into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 25)
 
     await filter.call([
       {

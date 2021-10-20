@@ -10,12 +10,12 @@ export interface TimestampFilterOptions {
 }
 
 /**
- * TimestampFilter checks if any timestamp is invalid, is older than 3 weeks, is more than 3 weeks in to the future
+ * TimestampFilter checks if any timestamp is invalid, is older than 3 weeks, is more than 1 hour in to the future
  * This filter rejects all assets if any timestamp fit a condition.
  */
 export class TimestampFilter extends AbstractFilter {
-  maxAge = new BigNumber(1000 * 60 * 60 * 24 * 7 * 3)
-  minAge = new BigNumber(1000 * 60 * 60 * 24 * 7 * 3).negated()
+  maxAge = new BigNumber(1000 * 60 * 60 * 24 * 7 * 3) // 3 weeks
+  minAge = new BigNumber(1000 * 60 * 60).negated() // 1 hour
 
   constructor (
     protected readonly network: NetworkName,
