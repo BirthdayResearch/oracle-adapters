@@ -37,9 +37,9 @@ jobs:
       - run: npm ci
       - run: npm run test:ci
 
-#      - uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b
-#        with:
-#          fail_ci_if_error: true
+      - uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b
+        with:
+          fail_ci_if_error: true
 
   lint:
     name: Lint
