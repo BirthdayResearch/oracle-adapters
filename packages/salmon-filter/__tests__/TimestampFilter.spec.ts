@@ -86,7 +86,7 @@ describe('default TimestampFilter', () => {
   })
 
   it('should error on older than 3 weeks', async () => {
-    const timestamp = new BigNumber(Date.now()).minus((1000 * 60 * 60 * 24 * 7 * 3) + 1000)
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3)
 
     await expect(async () => {
       await filter.call([
@@ -101,7 +101,7 @@ describe('default TimestampFilter', () => {
   })
 
   it('should error on more than 3 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus((1000 * 60 * 60 * 24 * 7 * 3) + 1)
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 3)
 
     await expect(async () => {
       await filter.call([
@@ -154,8 +154,8 @@ describe('default TimestampFilter', () => {
     ])
   })
 
-  it('should allow 3 weeks old', async () => {
-    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3)
+  it('should allow 3 weeks old - minus 1 min', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3).plus(1000 * 60)
 
     await filter.call([
       {
@@ -315,7 +315,7 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
   })
 
   it('should error on older than 3 weeks', async () => {
-    const timestamp = new BigNumber(Date.now()).minus((1000 * 60 * 60 * 24 * 7 * 3))
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3)
 
     await expect(async () => {
       await filter.call([
@@ -345,7 +345,7 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
   })
 
   it('should error on 2 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus((1000 * 60 * 60 * 24 * 7 * 2))
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 2)
 
     await expect(async () => {
       await filter.call([
@@ -360,7 +360,7 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
   })
 
   it('should error on 3 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus((1000 * 60 * 60 * 24 * 7 * 3))
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 3)
 
     await expect(async () => {
       await filter.call([
@@ -400,8 +400,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     ])
   })
 
-  it('should allow 2 weeks old', async () => {
-    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 2)
+  it('should allow 2 weeks old minus 1 min', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 2).plus(1000 * 60)
 
     await filter.call([
       {
