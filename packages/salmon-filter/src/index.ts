@@ -3,6 +3,7 @@ import { AssetPrice } from '@defichain/salmon-fetch'
 import { AbstractFilter } from './AbstractFilter'
 import { NetworkName } from '@defichain/jellyfish-network'
 import { WhaleApiClient } from '@defichain/whale-api-client'
+import { TokenFilter } from './filters/TokenFilter'
 
 /**
  * SalmonFilter orchestrates all Filter configured, it is run in the given order set in the constructor.
@@ -20,6 +21,7 @@ export class SalmonFilter extends AbstractFilter {
     super(network, whale, oracleId)
     this.filters = [
       new AmountFilter(network, whale, oracleId),
+      new TokenFilter(network, whale, oracleId),
       ...additionalFilters
     ]
   }
