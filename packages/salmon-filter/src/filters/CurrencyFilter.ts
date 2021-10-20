@@ -23,9 +23,5 @@ export class CurrencyFilter extends AbstractFilter {
  * @return boolean
  */
 function isInvalid (price: AssetPrice): boolean {
-  if (price.currency.trim().length === 0) {
-    return true
-  }
-
   return price.currency !== 'USD'
 }
