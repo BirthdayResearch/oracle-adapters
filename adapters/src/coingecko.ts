@@ -16,7 +16,7 @@ export default async function (symbols: string[]): Promise<AssetPrice[]> {
   const ids = symbols.map(symbol => MAPPING[symbol])
   const res = await fetchAsJson(`${URL}?ids=${ids.join(',')}&vs_currencies=usd`)
 
-  return Object.entries(MAPPING).map(([internal, external]): AssetPrice => {
-    return newAssetPrice(internal, res.data[external].usd, 'USD', Date.now())
+  return symbols.map((symbol: string): AssetPrice => {
+    return newAssetPrice(symbol, res.data[MAPPING[symbol]].usd, 'USD', Date.now())
   })
 }
