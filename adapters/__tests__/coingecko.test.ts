@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import coingecko from './coingecko'
+import coingecko from '../src/coingecko'
 
 describe('multi price fetch', () => {
   it('should fetch price from coingecko', async () => {

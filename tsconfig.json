@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@defichain/salmon": [
+        "packages/salmon/src"
+      ],
       "@defichain/salmon-*": [
         "packages/salmon-*/src"
       ]

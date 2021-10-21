@@ -1,7 +1,8 @@
 module.exports = {
   preset: 'ts-jest',
-  testRegex: '((\\.|/)(e2e|test|spec))\\.[jt]sx?$',
+  testRegex: '((\\.|/)(e2e|test|spec))\\.ts$',
   moduleNameMapper: {
+    '@defichain/salmon': '<rootDir>/packages/salmon/src',
     '@defichain/salmon-(.*)': '<rootDir>/packages/salmon-$1/src'
   },
   verbose: true,
