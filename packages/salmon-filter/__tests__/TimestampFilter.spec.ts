@@ -6,7 +6,9 @@ import { TimestampFilter } from '../src/filters/TimestampFilter'
 const container = new WhaleMasternodeRegTestContainer()
 let filter: AbstractFilter
 
-describe('default TimestampFilter', () => {
+const timeDelta = new BigNumber(1000 * 60) // 1 min
+
+describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () => {
   beforeAll(async () => {
     await container.start()
 
@@ -85,8 +87,8 @@ describe('default TimestampFilter', () => {
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
   })
 
-  it('should error on older than 3 weeks', async () => {
-    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3)
+  it('should error on older than 3 weeks (plus timeDelta)', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3).minus(timeDelta)
 
     await expect(async () => {
       await filter.call([
@@ -100,8 +102,8 @@ describe('default TimestampFilter', () => {
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
   })
 
-  it('should error on more than 3 weeks into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60 * 24 * 7 * 3)
+  it('should error on more than 1 hour (plus timeDelta) into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60).plus(timeDelta)
 
     await expect(async () => {
       await filter.call([
@@ -154,8 +156,8 @@ describe('default TimestampFilter', () => {
     ])
   })
 
-  it('should allow 3 weeks old - minus 1 min', async () => {
-    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3).plus(1000 * 60)
+  it('should allow 3 weeks old (minus timeDelta)', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 3).plus(timeDelta)
 
     await filter.call([
       {
@@ -180,8 +182,8 @@ describe('default TimestampFilter', () => {
     ])
   })
 
-  it('should allow 59 mins into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 59)
+  it('should allow 60 mins (minus timeDelta) into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 60).minus(timeDelta)
 
     await filter.call([
       {
@@ -213,7 +215,7 @@ describe('default TimestampFilter', () => {
   })
 })
 
-describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)', () => {
+describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) - timeDelta: ${timeDelta.toString()}ms`, () => {
   beforeAll(async () => {
     await container.start()
 
@@ -299,8 +301,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
   })
 
-  it('should error on older than 2 weeks', async () => {
-    const timestamp = new BigNumber(Date.now()).minus((1000 * 60 * 60 * 24 * 7 * 2) + 1)
+  it('should error on older than 2 weeks (plus timeDelta)', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 2).minus(timeDelta)
 
     await expect(async () => {
       await filter.call([
@@ -329,8 +331,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
   })
 
-  it('should error on 35 mins into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 35)
+  it('should error on 30 mins (plus timeDelta) into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 35).plus(timeDelta)
 
     await expect(async () => {
       await filter.call([
@@ -400,8 +402,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     ])
   })
 
-  it('should allow 2 weeks old minus 1 min', async () => {
-    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 2).plus(1000 * 60)
+  it('should allow 2 weeks old (minus timeDelta)', async () => {
+    const timestamp = new BigNumber(Date.now()).minus(1000 * 60 * 60 * 24 * 7 * 2).plus(timeDelta)
 
     await filter.call([
       {
@@ -426,8 +428,8 @@ describe('TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins)'
     ])
   })
 
-  it('should allow 29 mins into the future', async () => {
-    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 29)
+  it('should allow 30 mins (minus timeDelta) into the future', async () => {
+    const timestamp = new BigNumber(Date.now()).plus(1000 * 60 * 30).minus(timeDelta)
 
     await filter.call([
       {
