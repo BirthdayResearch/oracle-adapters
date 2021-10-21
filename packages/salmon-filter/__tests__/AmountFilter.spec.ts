@@ -3,6 +3,8 @@ import { WhaleMasternodeRegTestContainer } from '@defichain/salmon-testing'
 import { AbstractFilter } from '../src/AbstractFilter'
 import BigNumber from 'bignumber.js'
 
+jest.spyOn(console, 'error').mockImplementation(jest.fn)
+
 const container = new WhaleMasternodeRegTestContainer()
 let filter: AbstractFilter
 

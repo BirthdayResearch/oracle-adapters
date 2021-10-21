@@ -9,7 +9,7 @@ checks:
 exclude_patterns:
   - "dist/"
   - "**/node_modules/"
+  - "**/*.spec.ts"
   - "**/*.test.ts"
-  - "**/*.test.tsx"
   - "**/*.e2e.ts"
   - "**/*.d.ts"
