@@ -4,6 +4,7 @@ import { AbstractFilter } from './AbstractFilter'
 import { NetworkName } from '@defichain/jellyfish-network'
 import { WhaleApiClient } from '@defichain/whale-api-client'
 import { CurrencyFilter } from './filters/CurrencyFilter'
+import { TimestampFilter } from './filters/TimestampFilter'
 import { TokenFilter } from './filters/TokenFilter'
 
 /**
@@ -23,6 +24,7 @@ export class SalmonFilter extends AbstractFilter {
     this.filters = [
       new AmountFilter(network, whale, oracleId),
       new CurrencyFilter(network, whale, oracleId),
+      new TimestampFilter(network, whale, oracleId),
       new TokenFilter(network, whale, oracleId),
       ...additionalFilters
     ]
