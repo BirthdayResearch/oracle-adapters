@@ -23,10 +23,8 @@ beforeEach(async () => {
   await client.wallet.sendToAddress(address.address, 1)
   await container.ain.generate(1)
 
-  oracleId = await client.oracle.appointOracle(address.address,
-    ['BTC', 'ETH', 'DOGE'].map(x => ({ token: x, currency: 'USD' })), {
-      weightage: 1.0
-    })
+  const symbols = ['BTC', 'ETH', 'DOGE'].map(x => ({ token: x, currency: 'USD' }))
+  oracleId = await client.oracle.appointOracle(address.address, symbols, { weightage: 1.0 })
   await container.ain.generate(1)
 
   const height = await client.blockchain.getBlockCount()
