@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@defichain/salmon-fetch": "0.0.0",
-    "ethers": "^5.4.6"
+    "ethers": "^5.4.6",
+    "node-fetch": "^2.6.1"
   },
   "peerDependencies": {
-    "@defichain/salmon-core": "0.0.0"
+    "@defichain/salmon-core": "0.0.0",
+    "@types/node-fetch": "^2.5.10"
   }
 }
