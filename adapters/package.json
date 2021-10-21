@@ -12,7 +12,8 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/salmon-fetch": "0.0.0"
+    "@defichain/salmon-fetch": "0.0.0",
+    "ethers": "^5.4.6"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
