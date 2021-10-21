@@ -164,7 +164,7 @@ it('should fail on empty price list', async () => {
   const prices: AssetPrice[] = []
 
   await expect(async () => {
-    await wallet.send('invalid', prices)
+    await wallet.send(oracleId, prices)
   }).rejects.toThrowError('SalmonWallet.send prices list is empty')
 })
 
