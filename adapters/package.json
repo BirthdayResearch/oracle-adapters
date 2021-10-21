@@ -5,6 +5,7 @@
   "repository": "DeFiCh/oracle-adapters",
   "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
   "license": "MIT",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -14,10 +15,10 @@
   "dependencies": {
     "@defichain/salmon-fetch": "0.0.0",
     "ethers": "^5.4.6",
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^2.6.1"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0",
-    "@types/node-fetch": "^3.0.3"
+    "@types/node-fetch": "^2.5.10"
   }
 }
