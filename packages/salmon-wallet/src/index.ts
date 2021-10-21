@@ -32,6 +32,10 @@ export class SalmonWallet {
    * @return {string} txid
    */
   public async send (oracleId: string, prices: AssetPrice[]): Promise<string> {
+    if (prices.length === 0) {
+      throw new Error('SalmonWallet.send prices list is empty')
+    }
+
     const change = await this.account.getScript()
     const data = SalmonWallet.createSetOracleData(oracleId, prices)
 
