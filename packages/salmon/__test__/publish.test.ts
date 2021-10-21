@@ -1,6 +1,6 @@
 import waitForExpect from 'wait-for-expect'
 import { JsonRpcClient } from '@defichain/jellyfish-api-jsonrpc'
-import { GenesisKeys } from '@defichain/testcontainers'
+import { RegTestGenesisKeys } from '@defichain/jellyfish-network'
 import { WhaleMasternodeRegTestContainer } from '@defichain/salmon-testing'
 import { SalmonWallet } from '@defichain/salmon-wallet'
 import { BigNumber } from 'bignumber.js'
@@ -8,7 +8,7 @@ import { AssetPrice, Salmon, WhaleApiClient } from '../src'
 import coingecko from '@defichain/oracle-adapters/src/coingecko'
 
 const container = new WhaleMasternodeRegTestContainer()
-const address = GenesisKeys[GenesisKeys.length - 1].operator
+const address = RegTestGenesisKeys[RegTestGenesisKeys.length - 1].operator
 let client: JsonRpcClient
 let whaleApiClient: WhaleApiClient
 let oracleId: string
@@ -23,10 +23,8 @@ beforeEach(async () => {
   await client.wallet.sendToAddress(address.address, 1)
   await container.ain.generate(1)
 
-  oracleId = await client.oracle.appointOracle(address.address,
-    ['BTC', 'ETH', 'DOGE'].map(x => ({ token: x, currency: 'USD' })), {
-      weightage: 1.0
-    })
+  const symbols = ['BTC', 'ETH', 'DOGE'].map(x => ({ token: x, currency: 'USD' }))
+  oracleId = await client.oracle.appointOracle(address.address, symbols, { weightage: 1.0 })
   await container.ain.generate(1)
 
   const height = await client.blockchain.getBlockCount()
