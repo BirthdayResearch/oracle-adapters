@@ -3,6 +3,8 @@ import { AbstractFilter } from '../src/AbstractFilter'
 import BigNumber from 'bignumber.js'
 import { CurrencyFilter } from '../src/filters/CurrencyFilter'
 
+jest.spyOn(console, 'error').mockImplementation(jest.fn)
+
 const container = new WhaleMasternodeRegTestContainer()
 let filter: AbstractFilter
 
