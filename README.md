@@ -57,7 +57,7 @@ that automatically setup a `network` and connects `ain` and `whale` together pro
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
-SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by DeFiCh/oracle-adapters
+SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by DeFiCh/jellyfish
 ecosystem, this wallet uses Ocean APIs and required all transactions to be signed in Bech32 format.
 
 Requiring just PrivateKey (WIF), NetworkName, and WhaleApiClient for its entirety. This wallet will construct an oracle
