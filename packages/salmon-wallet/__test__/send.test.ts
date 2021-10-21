@@ -1,6 +1,6 @@
 import waitForExpect from 'wait-for-expect'
 import { JsonRpcClient } from '@defichain/jellyfish-api-jsonrpc'
-import { GenesisKeys } from '@defichain/testcontainers'
+import { RegTestGenesisKeys } from '@defichain/jellyfish-network'
 import { WhaleMasternodeRegTestContainer } from '@defichain/salmon-testing'
 import { SalmonWallet } from '@defichain/salmon-wallet'
 import { BigNumber } from 'bignumber.js'
@@ -8,7 +8,7 @@ import { WhaleApiClient } from '@defichain/whale-api-client'
 import { AssetPrice } from '@defichain/salmon'
 
 const container = new WhaleMasternodeRegTestContainer()
-const address = GenesisKeys[GenesisKeys.length - 1].operator
+const address = RegTestGenesisKeys[RegTestGenesisKeys.length - 1].operator
 let client: JsonRpcClient
 let whaleApiClient: WhaleApiClient
 let oracleId: string
