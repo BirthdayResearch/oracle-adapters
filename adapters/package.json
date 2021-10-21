@@ -5,7 +5,6 @@
   "repository": "DeFiCh/oracle-adapters",
   "bugs": "https://github.com/DeFiCh/oracle-adapters/issues",
   "license": "MIT",
-  "type": "module",
   "files": [
     "dist"
   ],
