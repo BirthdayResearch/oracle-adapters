@@ -1,7 +1,7 @@
-import { AmountFilter } from '../src/filters/AmountFilter'
 import { WhaleMasternodeRegTestContainer } from '@defichain/salmon-testing'
 import { AbstractFilter } from '../src/AbstractFilter'
 import BigNumber from 'bignumber.js'
+import { TokenFilter } from '../src/filters/TokenFilter'
 
 jest.spyOn(console, 'error').mockImplementation(jest.fn)
 
@@ -14,105 +14,118 @@ beforeAll(async () => {
   const network = 'regtest'
   const client = container.getWhaleApiClient()
   const oracleId = '0000000000000000000000000000000000000000000000000000000000000000'
-  filter = new AmountFilter(network, client, oracleId)
+  filter = new TokenFilter(network, client, oracleId)
 })
 
 afterAll(async () => {
   await container.stop()
 })
 
-it('should error on NaN', async () => {
+it('should error on empty string', async () => {
   await expect(async () => {
     await filter.call([
       {
-        token: 'TSLA',
-        amount: new BigNumber(NaN),
+        token: '',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
-it('should error on Infinity', async () => {
+it('should error on string with only whitespaces', async () => {
   await expect(async () => {
     await filter.call([
       {
-        token: 'TSLA',
-        amount: new BigNumber(Infinity),
+        token: '     ',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
-it('should error on -Infinity', async () => {
+it('should error on string with whitespaces (start)', async () => {
   await expect(async () => {
     await filter.call([
       {
-        token: 'TSLA',
-        amount: new BigNumber(-Infinity),
+        token: 'TSLA ',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
-it('should error on -1', async () => {
+it('should error on string with whitespaces (end)', async () => {
   await expect(async () => {
     await filter.call([
       {
-        token: 'TSLA',
-        amount: new BigNumber(-1),
+        token: 'TSLA ',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
-it('should error on Zero', async () => {
+it('should error on string with whitespaces (start & end)', async () => {
   await expect(async () => {
     await filter.call([
       {
-        token: 'TSLA',
-        amount: new BigNumber('0.0'),
+        token: 'TSLA ',
+        amount: new BigNumber(1),
+        currency: ' USD',
+        timestamp: new BigNumber('1634483733000')
+      }
+    ])
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
+})
+
+it('should error on string with whitespaces (in-between)', async () => {
+  await expect(async () => {
+    await filter.call([
+      {
+        token: 'TS LA ',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
 
-it('should allow 123.4', async () => {
+it('should allow TSLA', async () => {
   await filter.call([
     {
       token: 'TSLA',
-      amount: new BigNumber('123.4'),
+      amount: new BigNumber(1),
       currency: 'USD',
       timestamp: new BigNumber('1634483733000')
     }
   ])
 })
 
-it('should allow 1', async () => {
+it('should allow 123', async () => {
   await filter.call([
     {
-      token: 'TSLA',
-      amount: new BigNumber('1'),
+      token: '123',
+      amount: new BigNumber(1),
       currency: 'USD',
       timestamp: new BigNumber('1634483733000')
     }
   ])
 })
 
-it('should allow 0.00000123', async () => {
+it('should allow T$LA', async () => {
   await filter.call([
     {
-      token: 'TSLA',
-      amount: new BigNumber('0.00000123'),
+      token: 'T$LA',
+      amount: new BigNumber(1),
       currency: 'USD',
       timestamp: new BigNumber('1634483733000')
     }
@@ -124,16 +137,16 @@ it('should error and fail if one is invalid', async () => {
     await filter.call([
       {
         token: 'TSLA',
-        amount: new BigNumber('0.00000123'),
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       },
       {
-        token: 'TSLA',
-        amount: new BigNumber('-1'),
+        token: '',
+        amount: new BigNumber(1),
         currency: 'USD',
         timestamp: new BigNumber('1634483733000')
       }
     ])
-  }).rejects.toThrowError('AmountFilter.isInvalid ')
+  }).rejects.toThrowError('TokenFilter.isInvalid ')
 })
