@@ -31,15 +31,27 @@ it('should fetch price from iexcloud forex', async () => {
     })
 
   const prices = await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
-  expect(prices[0].token).toStrictEqual('CAD')
-  expect(prices[0].amount).toStrictEqual(new BigNumber(1).div(new BigNumber(1.31)))
-  expect(prices[0].timestamp).toStrictEqual(new BigNumber(1288282222000))
-  expect(prices[1].token).toStrictEqual('GBP')
-  expect(prices[1].amount).toStrictEqual(new BigNumber(1).div(new BigNumber(0.755)))
-  expect(prices[1].timestamp).toStrictEqual(new BigNumber(1288282222000))
-  expect(prices[2].token).toStrictEqual('JPY')
-  expect(prices[2].amount).toStrictEqual(new BigNumber(1).div(new BigNumber(100.43)))
-  expect(prices[2].timestamp).toStrictEqual(new BigNumber(1288282222000))
+
+  expect(prices).toStrictEqual([
+    {
+      token: 'CAD',
+      amount: new BigNumber(1).div(new BigNumber(1.31)),
+      currency: 'USD',
+      timestamp: new BigNumber(1288282222000)
+    },
+    {
+      token: 'GBP',
+      amount: new BigNumber(1).div(new BigNumber(0.755)),
+      currency: 'USD',
+      timestamp: new BigNumber(1288282222000)
+    },
+    {
+      token: 'JPY',
+      amount: new BigNumber(1).div(new BigNumber(100.43)),
+      currency: 'USD',
+      timestamp: new BigNumber(1288282222000)
+    }
+  ])
 })
 
 it('should error on invalid symbol', async () => {
