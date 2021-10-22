@@ -26,12 +26,26 @@ describe('multi price fetch with mocks', () => {
       })
 
     const prices = await coingecko(['BTC', 'ETH', 'DOGE'])
-    expect(prices[0].token).toStrictEqual('BTC')
-    expect(prices[0].amount).toStrictEqual(new BigNumber('39877'))
-    expect(prices[1].token).toStrictEqual('ETH')
-    expect(prices[1].amount).toStrictEqual(new BigNumber('2299.23'))
-    expect(prices[2].token).toStrictEqual('DOGE')
-    expect(prices[2].amount).toStrictEqual(new BigNumber('0.208377'))
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: new BigNumber('39877'),
+        timestamp: expect.any(BigNumber)
+      },
+      {
+        token: 'ETH',
+        currency: 'USD',
+        amount: new BigNumber('2299.23'),
+        timestamp: expect.any(BigNumber)
+      },
+      {
+        token: 'DOGE',
+        currency: 'USD',
+        amount: new BigNumber('0.208377'),
+        timestamp: expect.any(BigNumber)
+      }
+    ])
   })
 })
 
