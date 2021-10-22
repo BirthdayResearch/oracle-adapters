@@ -9,6 +9,6 @@
   "types": "dist/index.d.ts",
   "files": [],
   "dependencies": {
-    "defichain": "0.0.1"
+    "defichain": "0.48.1"
   }
 }
