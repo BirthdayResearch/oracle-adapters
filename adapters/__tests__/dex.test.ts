@@ -187,8 +187,5 @@ describe('multi price fetch', () => {
     const prices = await dex(symbols)
     expect(prices[0].token).toStrictEqual('DFI')
     expect(prices[0].amount).toStrictEqual(new BigNumber('2.020557796237096083'))
-
-    // const filteredPrices = PriceManager.filterTimestamps(prices, 300000)
-    // expect(filteredPrices.length).toStrictEqual(1)
   })
 })
