@@ -1,5 +1,5 @@
 import nock from 'nock'
-import iexcloudForex from '../src/iexcloudForex'
+import iexcloudForex from '../src/iexcloudforex'
 import BigNumber from 'bignumber.js'
 
 afterEach(() => {
@@ -79,5 +79,5 @@ it('should error on invalid symbol', async () => {
 
   await expect(async () => {
     await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
-  }).rejects.toThrowError(Error('iexcloudForex.invalidSymbol '))
+  }).rejects.toThrowError(Error('iexcloudforex.invalidSymbol '))
 })
