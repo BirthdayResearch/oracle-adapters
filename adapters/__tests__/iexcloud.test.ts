@@ -30,10 +30,14 @@ it('should fetch price from iexcloud', async () => {
     })
 
   const prices = await iexcloud(['FB'], 'API_TOKEN')
-  expect(prices[0].token).toStrictEqual('FB')
-  expect(prices[0].currency).toStrictEqual('USD')
-  expect(prices[0].amount).toStrictEqual(new BigNumber(121.41))
-  expect(prices[0].timestamp).toStrictEqual(new BigNumber(1480446908666))
+  expect(prices).toStrictEqual([
+    {
+      token: 'FB',
+      currency: 'USD',
+      amount: new BigNumber(121.41),
+      timestamp: new BigNumber(1480446908666)
+    }
+  ])
 })
 
 it('should fetch multiple prices from iexcloud', async () => {
@@ -87,13 +91,25 @@ it('should fetch multiple prices from iexcloud', async () => {
     })
 
   const prices = await iexcloud(['TSLA', 'AAPL', 'FB'], 'API_TOKEN')
-  expect(prices[0].token).toStrictEqual('TSLA')
-  expect(prices[0].amount).toStrictEqual(new BigNumber(605.14))
-  expect(prices[0].timestamp).toStrictEqual(new BigNumber(1623095998146))
-  expect(prices[1].token).toStrictEqual('AAPL')
-  expect(prices[1].amount).toStrictEqual(new BigNumber(126))
-  expect(prices[1].timestamp).toStrictEqual(new BigNumber(1623097192802))
-  expect(prices[2].token).toStrictEqual('FB')
-  expect(prices[2].amount).toStrictEqual(new BigNumber(336.59))
-  expect(prices[2].timestamp).toStrictEqual(new BigNumber(1623095999551))
+
+  expect(prices).toStrictEqual([
+    {
+      token: 'TSLA',
+      currency: 'USD',
+      amount: new BigNumber(605.14),
+      timestamp: new BigNumber(1623095998146)
+    },
+    {
+      token: 'AAPL',
+      currency: 'USD',
+      amount: new BigNumber(126),
+      timestamp: new BigNumber(1623097192802)
+    },
+    {
+      token: 'FB',
+      currency: 'USD',
+      amount: new BigNumber(336.59),
+      timestamp: new BigNumber(1623095999551)
+    }
+  ])
 })
