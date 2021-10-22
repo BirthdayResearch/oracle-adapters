@@ -24,11 +24,15 @@ describe('multi price fetch', () => {
         return '{"jsonrpc":"2.0","id":44,"result":"0x0000000000000000000000000000000000000000000000000000000061406448"}'
       })
 
-    const chainlinkPrices = await chainlink(symbols, 'API_TOKEN')
-    expect(chainlinkPrices[0].token).toStrictEqual('BTC')
-    expect(chainlinkPrices[0].currency).toStrictEqual('USD')
-    expect(chainlinkPrices[0].amount).toStrictEqual(new BigNumber(46017.61999158))
-    expect(chainlinkPrices[0].timestamp).toStrictEqual(new BigNumber(1631609928000))
+    const prices = await chainlink(symbols, 'API_TOKEN')
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: new BigNumber(46017.61999158),
+        timestamp: new BigNumber(1631609928000)
+      }
+    ])
   })
 })
 
@@ -59,9 +63,14 @@ describe('inverse price fetch', () => {
 
     const symbols = ['BTC_TEST_INVERSE']
     const prices = await chainlink(symbols, 'API_TOKEN')
-    expect(prices[0].token).toStrictEqual('BTC_TEST_INVERSE')
-    expect(prices[0].amount).toStrictEqual((new BigNumber(1.0)).dividedBy(46017.61999158))
-    expect(prices[0].timestamp).toStrictEqual(new BigNumber(1631609928000))
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC_TEST_INVERSE',
+        currency: 'USD',
+        amount: (new BigNumber(1.0)).dividedBy(46017.61999158),
+        timestamp: new BigNumber(1631609928000)
+      }
+    ])
   })
 })
 

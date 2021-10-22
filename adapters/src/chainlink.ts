@@ -52,9 +52,9 @@ async function fetchAsset (symbol: string, provider?: any): Promise<AssetPrice> 
   return newAssetPrice(symbol, price, 'USD', (new BigNumber(timestamp.toString())).multipliedBy(1000))
 }
 
-export default async function (symbols: string[], _apiToken?: string): Promise<AssetPrice[]> {
-  const apiToken = process.env.API_TOKEN ?? _apiToken
+export default async function (symbols: string[], apiToken: string): Promise<AssetPrice[]> {
   const provider = new ethers.providers.InfuraProvider('mainnet', apiToken)
+
   return await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, provider)
   }))
