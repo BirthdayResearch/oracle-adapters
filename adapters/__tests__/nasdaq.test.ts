@@ -7,7 +7,7 @@ afterEach(() => {
   nock.cleanAll()
 })
 
-it('should fetch price from nasdaq using config', async () => {
+it('should fetch price from nasdaq', async () => {
   nock('https://restapi.clouddataservice.nasdaq.com/v1/auth')
     .post('/token')
     .reply(200, function (_) {
