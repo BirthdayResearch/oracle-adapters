@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [],
-  "dependencies": {
-    "defichain": "0.0.1"
+  "peerDependencies": {
+    "defichain": "^0.48.1"
   }
 }
