@@ -95,20 +95,20 @@ it('should fetch multiple prices from iexcloud', async () => {
   expect(prices).toStrictEqual([
     {
       token: 'TSLA',
-      currency: 'USD',
       amount: new BigNumber(605.14),
+      currency: 'USD',
       timestamp: new BigNumber(1623095998146)
     },
     {
       token: 'AAPL',
-      currency: 'USD',
       amount: new BigNumber(126),
+      currency: 'USD',
       timestamp: new BigNumber(1623097192802)
     },
     {
       token: 'FB',
-      currency: 'USD',
       amount: new BigNumber(336.59),
+      currency: 'USD',
       timestamp: new BigNumber(1623095999551)
     }
   ])
