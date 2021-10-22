@@ -62,15 +62,26 @@ it('should fetch price from nasdaq', async () => {
     })
 
   const prices = await nasdaq(['TSLA', 'AAPL', 'FB'], 'API_TOKEN')
-  expect(prices[0].token).toStrictEqual('TSLA')
-  expect(prices[0].amount).toStrictEqual(new BigNumber(714.63))
-  expect(prices[0].timestamp).toStrictEqual(new BigNumber(1628193602430))
-  expect(prices[1].token).toStrictEqual('AAPL')
-  expect(prices[1].amount).toStrictEqual(new BigNumber(147.06))
-  expect(prices[1].timestamp).toStrictEqual(new BigNumber(1628193602286))
-  expect(prices[2].token).toStrictEqual('FB')
-  expect(prices[2].amount).toStrictEqual(new BigNumber(362.97))
-  expect(prices[2].timestamp).toStrictEqual(new BigNumber(1628193603279))
+  expect(prices).toStrictEqual([
+    {
+      token: 'TSLA',
+      amount: new BigNumber(714.63),
+      currency: 'USD',
+      timestamp: new BigNumber(1628193602430)
+    },
+    {
+      token: 'AAPL',
+      amount: new BigNumber(147.06),
+      currency: 'USD',
+      timestamp: new BigNumber(1628193602286)
+    },
+    {
+      token: 'FB',
+      amount: new BigNumber(362.97),
+      currency: 'USD',
+      timestamp: new BigNumber(1628193603279)
+    }
+  ])
 })
 
 it('should error on invalid api credentials', async () => {
