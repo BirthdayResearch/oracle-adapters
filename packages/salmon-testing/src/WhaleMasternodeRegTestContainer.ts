@@ -52,14 +52,22 @@ export class WhaleMasternodeRegTestContainer {
    * @return {WhaleApiClient}
    */
   getWhaleApiClient (): WhaleApiClient {
+    return new WhaleApiClient({
+      url: this.getWhaleApiUrl(),
+      version: this.getWhaleApiVersion(),
+      network: 'regtest'
+    })
+  }
+
+  getWhaleApiUrl (): string {
     if (this.whale === undefined) {
       throw new Error('WhaleMasternodeRegTestContainer not yet started.')
     }
 
-    return new WhaleApiClient({
-      url: `http://localhost:${this.whale.getMappedPort(3000)}`,
-      network: 'regtest',
-      version: 'v0'
-    })
+    return `http://localhost:${this.whale.getMappedPort(3000)}`
+  }
+
+  getWhaleApiVersion (): string {
+    return 'v0'
   }
 }
