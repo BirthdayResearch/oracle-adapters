@@ -90,9 +90,11 @@ TypeScript must be used for all code written in this project.
 
 ### Do not depend on external code. (never if possible)
 
-### Use PascalCase and period, not underscores, or dashes in filenames.
+### Use PascalCase and period, not underscores, or dashes in filenames*.
 
 Example: Use `FooBar.ts` instead of `foo-bar.ts` or `foo_bar.ts`.
+
+*Note: For adapters use lowercase, alphanumeric only
 
 ### Exported functions: max 2 args, put the rest into an options object.
 
