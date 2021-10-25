@@ -118,27 +118,24 @@ describe('multi price fetch', () => {
     const symbols = ['XAU', 'EUR', 'SGD']
 
     const prices = await finnhubbForex(symbols, 'API_TOKEN')
-    console.log('prices: ', prices[0].timestamp.toString())
-    console.log('prices: ', prices[1].timestamp.toString())
-    console.log('prices: ', prices[2].timestamp.toString())
     expect(prices).toStrictEqual([
       {
         token: 'XAU',
         amount: new BigNumber('1802.532'),
         currency: 'USD',
-        timestamp: new BigNumber('1625805900000')
+        timestamp: expect.any(BigNumber)
       },
       {
         token: 'EUR',
         amount: new BigNumber('1.35424'),
         currency: 'USD',
-        timestamp: new BigNumber('1625805900000')
+        timestamp: expect.any(BigNumber)
       },
       {
         token: 'SGD',
         amount: new BigNumber('0.72596335336992188634'),
         currency: 'USD',
-        timestamp: new BigNumber('1625805900000')
+        timestamp: expect.any(BigNumber)
       }
     ])
   })
