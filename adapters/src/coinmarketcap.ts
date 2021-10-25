@@ -7,9 +7,7 @@ import {
 
 const COINMARKETCAP_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
-export default async function (symbols: string[], _apiToken?: string): Promise<AssetPrice[]> {
-  const apiToken = _apiToken ?? ''
-
+export default async function (symbols: string[], apiToken = ''): Promise<AssetPrice[]> {
   const fetchPath = `${COINMARKETCAP_URL}?symbol=${symbols.join(',')}&CMC_PRO_API_KEY=${apiToken}`
   const response = await fetch(fetchPath, {
     method: 'GET'
