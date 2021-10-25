@@ -118,15 +118,32 @@ describe('multi price fetch', () => {
     const symbols = ['XAU', 'EUR', 'SGD']
 
     const prices = await finnhubbForex(symbols, 'API_TOKEN')
-    expect(prices[0].token).toStrictEqual('XAU')
-    expect(prices[0].amount).toStrictEqual(new BigNumber(1802.532))
-    expect(prices[1].token).toStrictEqual('EUR')
-    expect(prices[1].amount).toStrictEqual(new BigNumber(1.35424))
-    expect(prices[2].token).toStrictEqual('SGD')
-    expect(prices[2].amount).toStrictEqual(new BigNumber(1).div(new BigNumber(1.37748)))
+    console.log('prices: ', prices[0].timestamp.toString())
+    console.log('prices: ', prices[1].timestamp.toString())
+    console.log('prices: ', prices[2].timestamp.toString())
+    expect(prices).toStrictEqual([
+      {
+        token: 'XAU',
+        amount: new BigNumber('1802.532'),
+        currency: 'USD',
+        timestamp: new BigNumber('1625805900000')
+      },
+      {
+        token: 'EUR',
+        amount: new BigNumber('1.35424'),
+        currency: 'USD',
+        timestamp: new BigNumber('1625805900000')
+      },
+      {
+        token: 'SGD',
+        amount: new BigNumber('0.72596335336992188634'),
+        currency: 'USD',
+        timestamp: new BigNumber('1625805900000')
+      }
+    ])
   })
 
-  it('should handle empty price', async () => {
+  it('should not fetch price as empty price', async () => {
     nock('https://finnhub.io/')
       .filteringPath(() => {
         return '/'
@@ -152,11 +169,11 @@ describe('multi price fetch', () => {
 
     const symbols = ['SGD']
 
-    const prices = await finnhubbForex(symbols, 'API_TOKEN')
-    expect(prices.length).toStrictEqual(0)
+    const promise = finnhubbForex(symbols, 'API_TOKEN')
+    await expect(promise).rejects.toThrow('price is not string, number of BigNumber')
   })
 
-  it('should handle null price', async () => {
+  it('should not fetch price as null price', async () => {
     nock('https://finnhub.io/')
       .filteringPath(() => {
         return '/'
@@ -176,7 +193,7 @@ describe('multi price fetch', () => {
 
     const symbols = ['SGD']
 
-    const prices = await finnhubbForex(symbols, 'API_TOKEN')
-    expect(prices.length).toStrictEqual(0)
+    const promise = finnhubbForex(symbols, 'API_TOKEN')
+    await expect(promise).rejects.toThrow('price is not string, number of BigNumber')
   })
 })
