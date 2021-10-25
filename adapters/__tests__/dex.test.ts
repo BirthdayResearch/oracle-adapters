@@ -190,7 +190,7 @@ describe('multi price fetch', () => {
         token: 'DFI',
         amount: new BigNumber('2.020557796237096083'),
         currency: 'USD',
-        timestamp: new BigNumber('1635143189401')
+        timestamp: expect.any(BigNumber)
       }
     ])
   })
