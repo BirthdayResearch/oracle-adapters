@@ -190,11 +190,25 @@ describe('multi price fetch', () => {
 
     const symbols = ['BTC', 'ETH', 'DOGE']
     const prices = await coinmarketcap(symbols, 'API_TOKEN')
-    expect(prices[0].token).toStrictEqual('BTC')
-    expect(prices[0].amount).toStrictEqual(new BigNumber('39633.853292688436'))
-    expect(prices[1].token).toStrictEqual('DOGE')
-    expect(prices[1].amount).toStrictEqual(new BigNumber('0.20917968613823'))
-    expect(prices[2].token).toStrictEqual('ETH')
-    expect(prices[2].amount).toStrictEqual(new BigNumber('2297.4646020723612'))
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        amount: new BigNumber('39633.853292688436'),
+        currency: 'USD',
+        timestamp: new BigNumber('1627461062000000')
+      },
+      {
+        token: 'DOGE',
+        amount: new BigNumber('0.20917968613823'),
+        currency: 'USD',
+        timestamp: new BigNumber('1627461063000000')
+      },
+      {
+        token: 'ETH',
+        amount: new BigNumber('2297.4646020723612'),
+        currency: 'USD',
+        timestamp: new BigNumber('1627461062000000')
+      }
+    ])
   })
 })
