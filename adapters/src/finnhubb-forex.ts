@@ -49,7 +49,7 @@ export const FINNHUBB_OANDA_SYMBOL_MAPPING: Record<string, OandaSymbolMapping> =
  * https://finnhub.io
  */
 export default async function (symbols: string[], _apiToken?: string): Promise<AssetPrice[]> {
-  const apiToken = process.env.API_TOKEN ?? _apiToken ?? ''
+  const apiToken = _apiToken ?? ''
 
   return await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, apiToken)
