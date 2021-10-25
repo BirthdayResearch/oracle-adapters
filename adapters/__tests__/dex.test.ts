@@ -185,7 +185,13 @@ describe('multi price fetch', () => {
       })
 
     const prices = await dex(symbols)
-    expect(prices[0].token).toStrictEqual('DFI')
-    expect(prices[0].amount).toStrictEqual(new BigNumber('2.020557796237096083'))
+    expect(prices).toStrictEqual([
+      {
+        token: 'DFI',
+        amount: new BigNumber('2.020557796237096083'),
+        currency: 'USD',
+        timestamp: new BigNumber('1635143189401')
+      }
+    ])
   })
 })
