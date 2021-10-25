@@ -32,23 +32,21 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
   }
 }
 
-export interface EnvironmentConfig {
+export interface dexOptions {
   oceanUrl: string
   network: string
-}
-
-async function getEnvironmentConfig (): Promise<EnvironmentConfig> {
-  return {
-    oceanUrl: process.env.OCEAN_URL ?? 'https://localhost',
-    network: process.env.NETWORK ?? 'regtest'
-  }
 }
 
 /**
  * Fetches prices from Defichain DEX
  */
-export default async function (symbols: string[], _apiToken?: string): Promise<AssetPrice[]> {
-  const pairs = await getAllPairs()
+export default async function (
+  symbols: string[],
+  options: dexOptions = {
+    oceanUrl: 'https://localhost',
+    network: 'regtest'
+  }): Promise<AssetPrice[]> {
+  const pairs = await getAllPairs(options)
   const unfilteredData = (await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, pairs)
   })))
@@ -56,11 +54,10 @@ export default async function (symbols: string[], _apiToken?: string): Promise<A
   return assets
 }
 
-async function getAllPairs (): Promise<PoolPairData[]> {
-  const env: EnvironmentConfig = await getEnvironmentConfig()
+async function getAllPairs (options: dexOptions): Promise<PoolPairData[]> {
   const client = new WhaleApiClient({
-    url: env.oceanUrl,
-    network: env.network,
+    url: options.oceanUrl,
+    network: options.network,
     version: 'v0'
   })
 
