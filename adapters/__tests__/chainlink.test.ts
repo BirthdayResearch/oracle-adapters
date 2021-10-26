@@ -2,7 +2,12 @@ import nock from 'nock'
 import chainlink from '../src/chainlink'
 import BigNumber from 'bignumber.js'
 
-describe('multi price fetch', () => {
+describe('should fetch price from chainlink - nock', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+    nock.cleanAll()
+  })
+
   it('should fetch price from chainlink', async () => {
     const symbols = ['BTC']
 
@@ -33,13 +38,6 @@ describe('multi price fetch', () => {
         timestamp: new BigNumber(1631609928000)
       }
     ])
-  })
-})
-
-describe('inverse price fetch', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
   })
 
   it('should fetch inverse price from chainlink using config', async () => {
@@ -72,13 +70,6 @@ describe('inverse price fetch', () => {
       }
     ])
   })
-})
-
-describe('throw on invalid data', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
-  })
 
   it('should throw on corrupt data', async () => {
     nock('https://mainnet.infura.io/v3')
@@ -104,14 +95,34 @@ describe('throw on invalid data', () => {
   })
 })
 
-describe('multi price fetch - Live without api tokens', () => {
-  it('should fetch price from chainlink', async () => {
+describe('should fetch price from chainlink - live without api tokens', () => {
+  it('should fetch price from chainlink ', async () => {
+    const symbols = ['BTC']
+
+    const prices = await chainlink(symbols)
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      }
+    ])
+  })
+
+  it('should fetch multi price from chainlink', async () => {
     const symbols = ['BTC', 'ETH']
 
     const prices = await chainlink(symbols)
     expect(prices).toStrictEqual([
       {
         token: 'BTC',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      },
+      {
+        token: 'ETH',
         currency: 'USD',
         amount: expect.any(BigNumber),
         timestamp: expect.any(BigNumber)
