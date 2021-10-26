@@ -1,10 +1,6 @@
 import BigNumber from 'bignumber.js'
-import fetch from 'node-fetch'
-import {
-  JellyfishJSON
-} from '@defichain/jellyfish-json'
 import { poolpairs, WhaleApiClient } from '@defichain/whale-api-client'
-import { AssetPrice, newAssetPrice } from '@defichain/salmon-fetch'
+import { AssetPrice, newAssetPrice, fetchAsJson, FetchResponse } from '@defichain/salmon-fetch'
 
 type PoolPairData = poolpairs.PoolPairData
 
@@ -24,10 +20,8 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
     inverse: false,
     priceAdjustmentCallback: async () => {
       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
-      const response = await fetch(url, { method: 'GET' })
-      const text = await response.text()
-      const json = JellyfishJSON.parse(text, 'bignumber')
-      return new BigNumber(json.bitcoin.usd)
+      const res: FetchResponse = await fetchAsJson(url, { method: 'GET' })
+      return new BigNumber(res.data.bitcoin.usd)
     }
   }
 }
