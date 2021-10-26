@@ -103,3 +103,19 @@ describe('throw on invalid data', () => {
     await expect(chainlink(symbols, 'API_TOKEN')).rejects.toThrow()
   })
 })
+
+describe('multi price fetch - Live without api tokens', () => {
+  it('should fetch price from chainlink', async () => {
+    const symbols = ['BTC', 'ETH']
+
+    const prices = await chainlink(symbols)
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      }
+    ])
+  })
+})
