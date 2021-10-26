@@ -1,9 +1,5 @@
-import fetch from 'node-fetch'
 import BigNumber from 'bignumber.js'
-import {
-  JellyfishJSON
-} from '@defichain/jellyfish-json'
-import { AssetPrice, newAssetPrice } from '@defichain/salmon-fetch'
+import { AssetPrice, fetchAsJson, FetchResponse, newAssetPrice } from '@defichain/salmon-fetch'
 
 const FINNHUBB_URL = 'https://finnhub.io/api/v1/forex/candle'
 const CANDLE_RES = 5
@@ -61,21 +57,19 @@ async function fetchAsset (symbol: string, apiToken: string): Promise<AssetPrice
   const oandaSymbol = FINNHUBB_OANDA_SYMBOL_MAPPING[symbol].ticker
 
   const fetchPath = `${FINNHUBB_URL}?symbol=${oandaSymbol}&resolution=${CANDLE_RES}&token=${apiToken}&from=${tPrev}&to=${tNow}`
-  const response = await fetch(fetchPath, {
+  const res: FetchResponse = await fetchAsJson(fetchPath, {
     method: 'GET'
   })
 
-  const json = JellyfishJSON.parse(await response.text(), 'bignumber')
-
   // Out of market will return an object with null values
-  if (json.c === null) {
+  if (res.data.c === null) {
     return newAssetPrice(symbol, new BigNumber(NaN), 'USD', new BigNumber(NaN))
   }
 
-  let price = new BigNumber(json.c.slice(-1))
+  let price = new BigNumber(res.data.c.slice(-1))
   if (FINNHUBB_OANDA_SYMBOL_MAPPING[symbol].inverse) {
     price = new BigNumber(1).div(price)
   }
 
-  return newAssetPrice(symbol, price, 'USD', (new BigNumber(json.t.slice(-1))).multipliedBy(1000))
+  return newAssetPrice(symbol, price, 'USD', (new BigNumber(res.data.t.slice(-1))).multipliedBy(1000))
 }
