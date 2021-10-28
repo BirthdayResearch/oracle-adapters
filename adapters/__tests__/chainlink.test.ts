@@ -2,7 +2,12 @@ import nock from 'nock'
 import chainlink from '../src/chainlink'
 import BigNumber from 'bignumber.js'
 
-describe('multi price fetch', () => {
+describe('should fetch price from chainlink - nock', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+    nock.cleanAll()
+  })
+
   it('should fetch price from chainlink', async () => {
     const symbols = ['BTC']
 
@@ -24,18 +29,15 @@ describe('multi price fetch', () => {
         return '{"jsonrpc":"2.0","id":44,"result":"0x0000000000000000000000000000000000000000000000000000000061406448"}'
       })
 
-    const chainlinkPrices = await chainlink(symbols, 'API_TOKEN')
-    expect(chainlinkPrices[0].token).toStrictEqual('BTC')
-    expect(chainlinkPrices[0].currency).toStrictEqual('USD')
-    expect(chainlinkPrices[0].amount).toStrictEqual(new BigNumber(46017.61999158))
-    expect(chainlinkPrices[0].timestamp).toStrictEqual(new BigNumber(1631609928000))
-  })
-})
-
-describe('inverse price fetch', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
+    const prices = await chainlink(symbols, 'API_TOKEN')
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: new BigNumber(46017.61999158),
+        timestamp: new BigNumber(1631609928000)
+      }
+    ])
   })
 
   it('should fetch inverse price from chainlink using config', async () => {
@@ -59,16 +61,14 @@ describe('inverse price fetch', () => {
 
     const symbols = ['BTC_TEST_INVERSE']
     const prices = await chainlink(symbols, 'API_TOKEN')
-    expect(prices[0].token).toStrictEqual('BTC_TEST_INVERSE')
-    expect(prices[0].amount).toStrictEqual((new BigNumber(1.0)).dividedBy(46017.61999158))
-    expect(prices[0].timestamp).toStrictEqual(new BigNumber(1631609928000))
-  })
-})
-
-describe('throw on invalid data', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC_TEST_INVERSE',
+        currency: 'USD',
+        amount: (new BigNumber(1.0)).dividedBy(46017.61999158),
+        timestamp: new BigNumber(1631609928000)
+      }
+    ])
   })
 
   it('should throw on corrupt data', async () => {
@@ -92,5 +92,41 @@ describe('throw on invalid data', () => {
 
     const symbols = ['BTC']
     await expect(chainlink(symbols, 'API_TOKEN')).rejects.toThrow()
+  })
+})
+
+describe('should fetch price from chainlink - live without api tokens', () => {
+  it('should fetch price from chainlink ', async () => {
+    const symbols = ['BTC']
+
+    const prices = await chainlink(symbols)
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      }
+    ])
+  })
+
+  it('should fetch multi price from chainlink', async () => {
+    const symbols = ['BTC', 'ETH']
+
+    const prices = await chainlink(symbols)
+    expect(prices).toStrictEqual([
+      {
+        token: 'BTC',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      },
+      {
+        token: 'ETH',
+        currency: 'USD',
+        amount: expect.any(BigNumber),
+        timestamp: expect.any(BigNumber)
+      }
+    ])
   })
 })
