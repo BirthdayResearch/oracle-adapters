@@ -195,19 +195,19 @@ describe('multi price fetch', () => {
         token: 'BTC',
         amount: new BigNumber('39633.853292688436'),
         currency: 'USD',
-        timestamp: new BigNumber('1627461062000000')
+        timestamp: new BigNumber('1627461062')
       },
       {
         token: 'DOGE',
         amount: new BigNumber('0.20917968613823'),
         currency: 'USD',
-        timestamp: new BigNumber('1627461063000000')
+        timestamp: new BigNumber('1627461063')
       },
       {
         token: 'ETH',
         amount: new BigNumber('2297.4646020723612'),
         currency: 'USD',
-        timestamp: new BigNumber('1627461062000000')
+        timestamp: new BigNumber('1627461062')
       }
     ])
   })

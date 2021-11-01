@@ -10,7 +10,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
   const json = res.data.data
   return Object.keys(json).map((asset: any) => {
     const data = json[asset]
-    const timestamp = new BigNumber(Date.parse(data.last_updated)).multipliedBy(1000)
+    const timestamp = new BigNumber(Date.parse(data.last_updated)).dividedBy(1000)
     return newAssetPrice(
       asset,
       new BigNumber(data.quote.USD.price),
