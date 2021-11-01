@@ -78,5 +78,5 @@ async function fetchAsset (asset: string, pairs: PoolPairData[]): Promise<AssetP
   const tokenB = new BigNumber(symbolMapping.inverse ? data.tokenA.reserve : data.tokenB.reserve)
   const price = tokenA.div(tokenB).multipliedBy(await symbolMapping.priceAdjustmentCallback())
 
-  return newAssetPrice(asset, price, 'USD', new BigNumber(Math.floor(Date.now() / 1000)))
+  return newAssetPrice(asset, price, 'USD', new BigNumber(Date.now()))
 }
