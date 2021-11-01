@@ -71,5 +71,5 @@ async function fetchAsset (symbol: string, apiToken: string): Promise<AssetPrice
     price = new BigNumber(1).div(price)
   }
 
-  return newAssetPrice(symbol, price, 'USD', new BigNumber(res.data.t.slice(-1)))
+  return newAssetPrice(symbol, price, 'USD', new BigNumber(res.data.t.slice(-1)).multipliedBy(1000))
 }

@@ -123,19 +123,19 @@ describe('multi price fetch', () => {
         token: 'XAU',
         amount: new BigNumber('1802.532'),
         currency: 'USD',
-        timestamp: expect.any(BigNumber) // 1625805900
+        timestamp: new BigNumber('1625805900000')
       },
       {
         token: 'EUR',
         amount: new BigNumber('1.35424'),
         currency: 'USD',
-        timestamp: expect.any(BigNumber)
+        timestamp: new BigNumber('1625805900000')
       },
       {
         token: 'SGD',
         amount: new BigNumber('0.72596335336992188634'),
         currency: 'USD',
-        timestamp: expect.any(BigNumber)
+        timestamp: new BigNumber('1625805900000')
       }
     ])
   })
