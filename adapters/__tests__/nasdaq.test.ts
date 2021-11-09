@@ -67,19 +67,19 @@ it('should fetch price from nasdaq', async () => {
       token: 'TSLA',
       amount: new BigNumber(714.63),
       currency: 'USD',
-      timestamp: new BigNumber(1628193602430)
+      timestamp: expect.any(BigNumber)
     },
     {
       token: 'AAPL',
       amount: new BigNumber(147.06),
       currency: 'USD',
-      timestamp: new BigNumber(1628193602286)
+      timestamp: expect.any(BigNumber)
     },
     {
       token: 'FB',
       amount: new BigNumber(362.97),
       currency: 'USD',
-      timestamp: new BigNumber(1628193603279)
+      timestamp: expect.any(BigNumber)
     }
   ])
 })
