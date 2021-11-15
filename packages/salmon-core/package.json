@@ -9,6 +9,6 @@
   "types": "dist/index.d.ts",
   "files": [],
   "peerDependencies": {
-    "defichain": "^0.48.1"
+    "defichain": "^2.4.1"
   }
 }
