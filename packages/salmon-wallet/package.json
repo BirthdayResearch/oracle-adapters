@@ -14,15 +14,15 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/jellyfish-crypto": "^0.48.1",
-    "@defichain/jellyfish-network": "^0.48.1",
-    "@defichain/jellyfish-transaction": "^0.48.1",
-    "@defichain/jellyfish-transaction-builder": "^0.48.1",
-    "@defichain/jellyfish-wallet": "^0.48.1",
-    "@defichain/jellyfish-wallet-classic": "^0.48.1",
+    "@defichain/jellyfish-crypto": "^2.4.1",
+    "@defichain/jellyfish-network": "^2.4.1",
+    "@defichain/jellyfish-transaction": "^2.4.1",
+    "@defichain/jellyfish-transaction-builder": "^2.4.1",
+    "@defichain/jellyfish-wallet": "^2.4.1",
+    "@defichain/jellyfish-wallet-classic": "^2.4.1",
     "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/whale-api-client": "^0.11.5",
-    "@defichain/whale-api-wallet": "^0.11.5"
+    "@defichain/whale-api-client": "^0.14.1",
+    "@defichain/whale-api-wallet": "^0.14.1"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
