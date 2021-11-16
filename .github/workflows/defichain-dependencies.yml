@@ -6,17 +6,17 @@ on:
     - cron: '0 * * * *'
 
 jobs:
-  jellyfish:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
       - uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c
         with:
-          node-version: 15
+          node-version: 16
 
       - name: Upgrade dependencies
         run: |
-          npx npm-check-updates -l m -u --deep --target newest --pre -f "/^@defichain\/.+/" -x "/^@defichain\/(whale|salmon)-.+/" \
+          npx npm-check-updates -l m -u --deep --target newest --pre -f "/^defichain|@defichain\/.+/" -x "/^@defichain\/(oracle-adapters|salmon)-.+/" \
           | grep -q 'Run npm install to install new versions' && \
           npm i
 
@@ -27,41 +27,11 @@ jobs:
           labels: kind/dependencies
           committer: DeFiChain Bot <github-bot@defichain.com>
           author: DeFiChain Bot <github-bot@defichain.com>
-          title: Bump @defichain/jellyfish dependencies
-          commit-message: Bump @defichain/jellyfish dependencies
+          title: Bump @defichain/* dependencies
+          commit-message: Bump @defichain/* dependencies
           body: |
             #### What kind of PR is this?:
             /kind dependencies
             #### What this PR does / why we need it:
-            Bump `@defichain/jellyfish` dependencies to the latest release.
-          branch: defichain-bot/bump-jellyfish-deps
-
-  whale:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c
-        with:
-          node-version: 15
-
-      - name: Upgrade dependencies
-        run: |
-          npx npm-check-updates -l m -u --deep --target newest --pre -f "/^@defichain\/whale-.+/" \
-          | grep -q 'Run npm install to install new versions' && \
-          npm i
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@67df31e08a133c6a77008b89689677067fef169e
-        with:
-          token: ${{ secrets.DEFICHAIN_BOT_GITHUB_TOKEN }}
-          labels: kind/dependencies
-          committer: DeFiChain Bot <github-bot@defichain.com>
-          author: DeFiChain Bot <github-bot@defichain.com>
-          title: Bump @defichain/whale dependencies
-          commit-message: Bump @defichain/whale dependencies
-          body: |
-            #### What kind of PR is this?:
-            /kind dependencies
-            #### What this PR does / why we need it:
-            Bump `@defichain/whale` dependencies to the latest release.
-          branch: defichain-bot/bump-whale-deps
+            Bump `@defichain/*` dependencies to the latest release.
+          branch: defichain-bot/bump-defichain-deps

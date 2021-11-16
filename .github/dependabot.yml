@@ -8,6 +8,7 @@ updates:
       - "kind/dependencies"
     ignore:
       - dependency-name: "@defichain/*"
+      - dependency-name: "@defich/*"
     versioning-strategy: "increase"
 
   - package-ecosystem: "github-actions"
