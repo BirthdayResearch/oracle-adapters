@@ -7,8 +7,10 @@ updates:
     labels:
       - "kind/dependencies"
     ignore:
-      - dependency-name: "@defichain/*"
+      - dependency-name: "defich"
+      - dependency-name: "defichain"
       - dependency-name: "@defich/*"
+      - dependency-name: "@defichain/*"
     versioning-strategy: "increase"
 
   - package-ecosystem: "github-actions"
