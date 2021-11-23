@@ -7,8 +7,5 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [],
-  "peerDependencies": {
-    "defichain": "^2.4.1"
-  }
+  "files": []
 }
