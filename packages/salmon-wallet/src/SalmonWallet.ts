@@ -16,10 +16,10 @@ import { SetOracleData, CTransactionSegWit } from '@defichain/jellyfish-transact
  */
 export class SalmonWallet {
   constructor (
-    privateKey: string,
-    network: NetworkName,
-    wallet = new WalletClassic(WIF.asEllipticPair(privateKey)),
+    private readonly privateKey: string,
+    private readonly network: NetworkName,
     private readonly client: WhaleApiClient,
+    private readonly wallet = new WalletClassic(WIF.asEllipticPair(privateKey)),
     private readonly account = new WhaleWalletAccount(client, wallet, getNetwork(network))
   ) {
   }
