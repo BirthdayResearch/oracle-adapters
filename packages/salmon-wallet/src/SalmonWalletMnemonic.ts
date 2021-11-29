@@ -6,11 +6,18 @@ import { WhaleWalletAccount } from '@defichain/whale-api-wallet'
 const PURPOSE_LIGHT_ORACLE_ADAPTER = 2
 
 /**
- * Basic wrapper around JellyfishWallet, so we can extend with any oracle specific
- * functionality we might need
+ * Basic wrapper around JellyfishWallet, this uses a mnemonic phrase to initialise
+ * an HD wallet, and provides the same functionality as JellyfishWallet
+ *
+ * See: https://github.com/DeFiCh/jellyfish/tree/main/packages/jellyfish-wallet/src/wallet.ts
  */
 
 export class SalmonWalletMnemonic extends JellyfishWallet<WhaleWalletAccount, MnemonicHdNode> {
+  /**
+   * @param {string[]} words to derive
+   * @param {Network} network
+   * @param {WalletAccountProvider<WhaleWalletAccount>} accountProvider
+   */
   constructor (
     words: string[],
     network: Network,
