@@ -3,8 +3,6 @@ import { JellyfishWallet, WalletAccountProvider } from '@defichain/jellyfish-wal
 import { Bip32Options, MnemonicHdNode, MnemonicHdNodeProvider } from '@defichain/jellyfish-wallet-mnemonic'
 import { WhaleWalletAccount } from '@defichain/whale-api-wallet'
 
-const PURPOSE_LIGHT_ORACLE_ADAPTER = 2
-
 /**
  * Basic wrapper around JellyfishWallet, this uses a mnemonic phrase to initialise
  * an HD wallet, and provides the same functionality as JellyfishWallet
@@ -27,7 +25,7 @@ export class SalmonWalletMnemonic extends JellyfishWallet<WhaleWalletAccount, Mn
       SalmonWalletMnemonic.getBip32Options(network))
 
     const coinType: number = JellyfishWallet.COIN_TYPE_DFI
-    const purpose: number = PURPOSE_LIGHT_ORACLE_ADAPTER
+    const purpose: number = JellyfishWallet.PURPOSE_LIGHT_PRICE_ORACLE
     super(hdNodeProvider, accountProvider, coinType, purpose)
   }
 
