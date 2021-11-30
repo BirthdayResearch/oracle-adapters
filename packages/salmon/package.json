@@ -14,11 +14,11 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/jellyfish-network": "^2.7.3",
+    "@defichain/jellyfish-network": "^2.10.0",
     "@defichain/salmon-fetch": "0.0.0",
     "@defichain/salmon-filter": "0.0.0",
     "@defichain/salmon-wallet": "0.0.0",
-    "@defichain/whale-api-client": "^0.16.0"
+    "@defichain/whale-api-client": "^0.16.3"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
