@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@defichain/testcontainers": "^2.10.0",
-    "@defichain/whale-api-client": "^0.17.0",
+    "@defichain/whale-api-client": "^0.17.2",
     "testcontainers": "^7.24.0"
   },
   "peerDependencies": {
