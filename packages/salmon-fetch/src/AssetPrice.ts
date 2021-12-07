@@ -30,7 +30,7 @@ export function newAssetPrice (token: string, price: string | number | BigNumber
   }
 
   if (!isPriceValid(price)) {
-    throw new Error('price is not string, number of BigNumber')
+    throw new Error(`price for token ${token} is not string, number or BigNumber`)
   }
 
   if (typeof currency as any !== 'string') {
