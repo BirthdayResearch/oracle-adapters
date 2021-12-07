@@ -167,7 +167,7 @@ describe('multi price fetch', () => {
     const symbols = ['SGD']
 
     const promise = finnhubbForex(symbols, 'API_TOKEN')
-    await expect(promise).rejects.toThrow('price is not string, number of BigNumber')
+    await expect(promise).rejects.toThrow('price for token SGD is not string, number or BigNumber')
   })
 
   it('should not fetch price as null price', async () => {
@@ -191,6 +191,6 @@ describe('multi price fetch', () => {
     const symbols = ['SGD']
 
     const promise = finnhubbForex(symbols, 'API_TOKEN')
-    await expect(promise).rejects.toThrow('price is not string, number of BigNumber')
+    await expect(promise).rejects.toThrow('price for token SGD is not string, number or BigNumber')
   })
 })

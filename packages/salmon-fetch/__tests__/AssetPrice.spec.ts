@@ -32,43 +32,43 @@ describe('AssetPrice.amount', () => {
   it('should exclude invalid price - string', () => {
     expect(() => {
       newAssetPrice('APPL', '$1.00', 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - NaN', () => {
     expect(() => {
       newAssetPrice('APPL', new BigNumber(NaN), 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - Infinity', () => {
     expect(() => {
       newAssetPrice('APPL', new BigNumber(Infinity), 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - array', () => {
     expect(() => {
       newAssetPrice('APPL', [] as any, 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - JSON', () => {
     expect(() => {
       newAssetPrice('APPL', JSON.parse('{}'), 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - Date', () => {
     expect(() => {
       newAssetPrice('APPL', new Date() as any, 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 
   it('should exclude invalid price - null', () => {
     expect(() => {
       newAssetPrice('APPL', null as any, 'USD', 0)
-    }).toThrowError(Error('price is not string, number of BigNumber'))
+    }).toThrowError(Error('price for token APPL is not string, number or BigNumber'))
   })
 })
 
