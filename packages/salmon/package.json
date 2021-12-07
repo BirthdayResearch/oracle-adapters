@@ -18,7 +18,7 @@
     "@defichain/salmon-fetch": "0.0.0",
     "@defichain/salmon-filter": "0.0.0",
     "@defichain/salmon-wallet": "0.0.0",
-    "@defichain/whale-api-client": "^0.17.0"
+    "@defichain/whale-api-client": "^0.17.2"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
