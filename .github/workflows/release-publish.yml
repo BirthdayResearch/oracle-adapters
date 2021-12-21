@@ -31,9 +31,10 @@ jobs:
       - run: npm run build
       - run: npm run version:set ${{ steps.version.outputs.result }}
 
-      - name: find and replace peerDependencies # because lerna doesn't update peers deps
+      # Because lerna doesn't update peers deps, although using it "wrongly" this behavior ensures all deps are aligned.
+      - name: find and replace peerDependencies
         run: |
-          find packages/*/package.json adapters/package.json -type f -exec sed -i 's#    "@defichain/salmon-core": "0.0.0"#    "@defichain/salmon-core": "${{ steps.version.outputs.result }}"#g' {} \;
+          find packages/*/package.json adapters/package.json -type f -exec sed -i 's#    "@defichain/salmon-core": "0.0.0"#    "@defichain/salmon-core": "^${{ steps.version.outputs.result }}"#g' {} \;
 
       - name: Publish
         run: |
