@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { poolpairs, WhaleApiClient } from '@defichain/whale-api-client'
-import { AssetPrice, newAssetPrice, fetchAsJson, FetchResponse } from '@defichain/salmon-fetch'
+import { AssetPrice, fetchAsJson, FetchResponse, newAssetPrice } from '@defichain/salmon-fetch'
 
 type PoolPairData = poolpairs.PoolPairData
 
@@ -26,38 +26,37 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
   }
 }
 
-export interface dexOptions {
-  oceanUrl: string
-  network: string
+export interface DexOptions {
+  whale: {
+    url: string
+    network: string
+    version: string
+  }
 }
 
 /**
  * Fetches prices from Defichain DEX
  */
-export default async function (
-  symbols: string[],
-  options: dexOptions = {
-    oceanUrl: 'https://localhost',
-    network: 'regtest'
-  }): Promise<AssetPrice[]> {
+export default async function (symbols: string[], options: DexOptions): Promise<AssetPrice[]> {
   const pairs = await getAllPairs(options)
-  const unfilteredData = (await Promise.all(symbols.map(async symbol => {
+
+  const unfilteredAssetPrices: Array<AssetPrice | undefined> = await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, pairs)
-  })))
-  const assets: AssetPrice[] = unfilteredData.filter(x => (x !== undefined)) as AssetPrice[]
-  return assets
+  }))
+
+  return unfilteredAssetPrices.filter(x => (x !== undefined)) as AssetPrice[]
 }
 
-async function getAllPairs (options: dexOptions): Promise<PoolPairData[]> {
+async function getAllPairs (options: DexOptions): Promise<PoolPairData[]> {
   const client = new WhaleApiClient({
-    url: options.oceanUrl,
-    network: options.network,
-    version: 'v0'
+    url: options.whale.url,
+    network: options.whale.network,
+    version: options.whale.version
   })
 
   const pairs: poolpairs.PoolPairData[] = []
 
-  let response = await client.poolpairs.list()
+  let response = await client.poolpairs.list(200)
   pairs.push(...response)
 
   while (response.hasNext) {
@@ -74,6 +73,7 @@ async function fetchAsset (asset: string, pairs: PoolPairData[]): Promise<AssetP
   if (data === undefined) {
     return undefined
   }
+
   const tokenA = new BigNumber(symbolMapping.inverse ? data.tokenB.reserve : data.tokenA.reserve)
   const tokenB = new BigNumber(symbolMapping.inverse ? data.tokenA.reserve : data.tokenB.reserve)
   const price = tokenA.div(tokenB).multipliedBy(await symbolMapping.priceAdjustmentCallback())
