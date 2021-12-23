@@ -1,4 +1,3 @@
-
 import nock from 'nock'
 import dex from '../src/dex'
 import BigNumber from 'bignumber.js'
@@ -186,7 +185,13 @@ describe('multi price fetch', () => {
 
     const symbols = ['DFI']
 
-    const prices = await dex(symbols)
+    const prices = await dex(symbols, {
+      whale: {
+        network: 'regtest',
+        url: 'https://localhost',
+        version: 'v0'
+      }
+    })
     expect(prices).toStrictEqual([
       {
         token: 'DFI',
@@ -237,7 +242,13 @@ describe('multi price fetch', () => {
 
     const symbols = ['DFI']
 
-    const prices = await dex(symbols)
+    const prices = await dex(symbols, {
+      whale: {
+        network: 'regtest',
+        url: 'https://localhost',
+        version: 'v0'
+      }
+    })
     expect(prices).toStrictEqual([])
   })
 })
