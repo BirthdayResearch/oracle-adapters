@@ -22,8 +22,8 @@
     "@defichain/jellyfish-wallet-classic": "^2.14.2",
     "@defichain/jellyfish-wallet-mnemonic": "^2.14.2",
     "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/whale-api-client": "^0.18.6",
-    "@defichain/whale-api-wallet": "^0.18.6"
+    "@defichain/whale-api-client": "^0.18.7",
+    "@defichain/whale-api-wallet": "^0.18.7"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
