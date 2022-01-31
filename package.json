@@ -16,10 +16,10 @@
     "test:ci": "jest --ci --coverage --forceExit --maxWorkers=4"
   },
   "devDependencies": {
-    "@defichain/jellyfish-testing": "^2.14.2",
-    "@defichain/testcontainers": "^2.14.2",
+    "@defichain/jellyfish-testing": "^2.16.0",
+    "@defichain/testcontainers": "^2.16.0",
     "@types/jest": "^27.4.0",
-    "defichain": "^2.14.2",
+    "defichain": "^2.16.0",
     "eslint": "^7.32.0",
     "eslint-config-standard-jsx": "^10.0.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
