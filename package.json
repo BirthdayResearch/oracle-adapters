@@ -18,7 +18,7 @@
   "devDependencies": {
     "@defichain/jellyfish-testing": "^2.16.0",
     "@defichain/testcontainers": "^2.16.0",
-    "@types/jest": "^27.4.0",
+    "@types/jest": "^27.4.1",
     "defichain": "^2.16.0",
     "eslint": "^7.32.0",
     "eslint-config-standard-jsx": "^10.0.0",
