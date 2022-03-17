@@ -16,7 +16,7 @@
   "dependencies": {
     "@defichain/jellyfish-network": "^2.31.0",
     "@defichain/salmon-fetch": "0.0.0",
-    "@defichain/whale-api-client": "^0.30.1"
+    "@defichain/whale-api-client": "^0.31.0"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
