@@ -2,7 +2,7 @@ import { Network } from '@defichain/jellyfish-network'
 import { JellyfishWallet, WalletAccountProvider, WalletEllipticPair } from '@defichain/jellyfish-wallet'
 import { Bip32Options, MnemonicHdNode, MnemonicHdNodeProvider } from '@defichain/jellyfish-wallet-mnemonic'
 import { WhaleWalletAccount } from '@defichain/whale-api-wallet'
-import { WIF } from '@defichain/jellyfish-crypto'
+import { Bech32, WIF } from '@defichain/jellyfish-crypto'
 
 /**
  * Basic wrapper around JellyfishWallet, this uses a mnemonic phrase to initialise
@@ -40,6 +40,18 @@ export class SalmonWalletMnemonic extends JellyfishWallet<WhaleWalletAccount, Mn
     const node = this.deriveNode(account)
     const privateKey = await node.privateKey()
     return WIF.encode(this.network.wifPrefix, privateKey)
+  }
+
+  /**
+   * Get address with account number in SalmonWalletMnemonic.
+   *
+   * @param {number} account number to get
+   * @return {Promise<string>} address
+   */
+  async getAddress (account: number): Promise<string> {
+    const node = this.deriveNode(account)
+    const pubKey = await node.publicKey()
+    return Bech32.fromPubKey(pubKey, this.network.bech32.hrp, 0x00)
   }
 
   private static getMnemonicHdNodeProvider (words: string[], network: Network): MnemonicHdNodeProvider {

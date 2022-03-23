@@ -20,6 +20,19 @@ it('should generate addresses', async () => {
   expect(await wallet.get(2).getAddress()).toStrictEqual('bcrt1qkwhwtlskl0uhresp2wwrx7jrqqxpxss65jrxx3')
 })
 
+it('should generate addresses without accessing a node', async () => {
+  const client = new WhaleApiClient({
+    url: 'https://ocean.defichain.com',
+    network: 'regtest'
+  })
+  const accountProvider = new WhaleWalletAccountProvider(client, getNetwork('regtest'))
+  const wallet = new SalmonWalletMnemonic(ABANDON_WORDS, getNetwork('regtest'), accountProvider)
+
+  expect(await wallet.getAddress(0)).toStrictEqual(await wallet.get(0).getAddress())
+  expect(await wallet.getAddress(1)).toStrictEqual(await wallet.get(1).getAddress())
+  expect(await wallet.getAddress(2)).toStrictEqual(await wallet.get(2).getAddress())
+})
+
 it('should be able to get private key in WIF (regtest)', async () => {
   const wallet = new SalmonWalletMnemonic(ABANDON_WORDS, getNetwork('regtest'))
 
