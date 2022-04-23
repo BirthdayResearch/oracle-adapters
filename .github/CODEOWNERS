@@ -1,11 +1,11 @@
 # Define individuals that are responsible for code in this repository.
 # More details are here: https://help.github.com/articles/about-codeowners/
 
-/.github/                                       @fuxingloh @monstrobishi @joeldavidw
+/.github/                                       @fuxingloh @joeldavidw @nichellekoh
 
-/adapters/                                      @fuxingloh @monstrobishi @joeldavidw
-/packages/                                      @fuxingloh @monstrobishi @joeldavidw
+/adapters/                                      @fuxingloh @joeldavidw @nichellekoh
+/packages/                                      @fuxingloh @joeldavidw @nichellekoh
 
-CONTRIBUTING.md                                 @fuxingloh @monstrobishi @joeldavidw
-README.md                                       @fuxingloh @monstrobishi @joeldavidw
+CONTRIBUTING.md                                 @fuxingloh @joeldavidw @nichellekoh
+README.md                                       @fuxingloh @joeldavidw @nichellekoh
 LICENSE                                         @fuxingloh
