@@ -30,7 +30,7 @@ jobs:
           labels: kind/dependencies
           committer: DeFiChain Bot <github-bot@defichain.com>
           author: DeFiChain Bot <github-bot@defichain.com>
-          title: Bump @defichain/* dependencies
+          title: "bump(deps): @defichain/* dependencies"
           commit-message: Bump @defichain/* dependencies
           body: |
             #### What kind of PR is this?:
