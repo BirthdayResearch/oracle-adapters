@@ -12,8 +12,8 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/testcontainers": "^2.41.0",
-    "@defichain/whale-api-client": "^0.33.9",
+    "@defichain/testcontainers": "^2.42.1",
+    "@defichain/whale-api-client": "^0.33.10",
     "testcontainers": "^8.4.0"
   },
   "peerDependencies": {
