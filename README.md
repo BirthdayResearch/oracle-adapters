@@ -1,11 +1,11 @@
-[![CI](https://github.com/DeFiCh/oracle-adapters/actions/workflows/ci.yml/badge.svg)](https://github.com/DeFiCh/oracle-adapters/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/DeFiCh/oracle-adapters/branch/main/graph/badge.svg?token=IYL9K0WROA)](https://codecov.io/gh/DeFiCh/oracle-adapters)
-[![Maintainability](https://api.codeclimate.com/v1/badges/02685503dbd6a40ba1eb/maintainability)](https://codeclimate.com/github/DeFiCh/oracle-adapters/maintainability)
+[![CI](https://github.com/JellyfishSDK/oracle-adapters/actions/workflows/ci.yml/badge.svg)](https://github.com/JellyfishSDK/oracle-adapters/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/JellyfishSDK/oracle-adapters/branch/main/graph/badge.svg?token=qe3Z6Cs3be)](https://codecov.io/gh/JellyfishSDK/oracle-adapters)
 [![npm](https://img.shields.io/npm/v/@defichain/salmon)](https://www.npmjs.com/package/@defichain/salmon)
 
 # DeFiChain Oracle Adapters (The Salmon Project)
 
-> Mono-repo for DeFiChain Oracle Adapters. Next generation implementation replacing existing [`DeFiCh/salmon`](https://github.com/DeFiCh/salmon).
+> Mono-repo for DeFiChain Oracle Adapters. Next generation implementation replacing
+> existing [`JellyfishSDK/salmon`](https://github.com/JellyfishSDK/salmon).
 
 ## Technical Design
 
@@ -57,12 +57,12 @@ that automatically setup a `network` and connects `ain` and `whale` together pro
 
 ### [@defichain/salmon-wallet](./packages/salmon-wallet)
 
-SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by DeFiCh/jellyfish
-ecosystem, this wallet uses Ocean APIs and required all transactions to be signed in Bech32 format.
+SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by the jellyfish
+ecosystem, this wallet uses Ocean APIs and requires all transactions to be signed in Bech32 format.
 
-Requiring just PrivateKey (WIF), NetworkName, and WhaleApiClient for its entirety. This wallet will construct an oracle
-price feed for submission, sign the oracle price feed with the given private key. Lastly, submit the price feed into the
-connected network.
+Requiring just the PrivateKey (WIF), NetworkName, and WhaleApiClient for its entirety. This wallet will construct an
+oracle price feed for submission and sign the oracle price feed with the given private key. Lastly, submit the price
+feed into the connected network.
 
 ## Usage
 
@@ -84,7 +84,7 @@ async function main (): Promise<void> {
 ## Security issues
 
 If you discover a security vulnerability in
-`@defichain/salmon`, [please see submit it privately](https://github.com/DeFiCh/.github/blob/main/SECURITY.md).
+`@defichain/salmon`, [please see submit it privately](https://github.com/JellyfishSDK/.github/blob/main/SECURITY.md).
 
 ## License & Disclaimer
 

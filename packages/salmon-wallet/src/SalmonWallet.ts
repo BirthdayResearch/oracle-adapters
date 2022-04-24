@@ -7,12 +7,12 @@ import { AssetPrice, BigNumber } from '@defichain/salmon-fetch'
 import { SetOracleData, CTransactionSegWit } from '@defichain/jellyfish-transaction'
 
 /**
- * SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by DeFiCh/jellyfish
+ * SalmonWallet is a serverless first lightweight wallet setup that is easy to configure. Powered by the jellyfish
  * ecosystem, this wallet uses Ocean APIs and requires all transactions to be signed in Bech32 format.
  *
- * Requiring just PrivateKey (WIF), NetworkName and WhaleApiClient for its entirety. This wallet will construct oracle
- * price feed for submission, sign the oracle price feed with the given private key. Lastly, submit the price feed into
- * the connected network.
+ * Requiring just the PrivateKey (WIF), NetworkName, and WhaleApiClient for its entirety. This wallet will construct an
+ * oracle price feed for submission and sign the oracle price feed with the given private key. Lastly, submit the price
+ * feed into the connected network.
  */
 export class SalmonWallet {
   constructor (
