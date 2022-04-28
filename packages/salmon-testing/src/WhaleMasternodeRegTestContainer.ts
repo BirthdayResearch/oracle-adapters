@@ -28,7 +28,7 @@ export class WhaleMasternodeRegTestContainer {
     await this.ain.restart()
 
     const ip = await this.ain.getIp(network.getName())
-    this.whale = await new GenericContainer('ghcr.io/defich/whale:' + version)
+    this.whale = await new GenericContainer('ghcr.io/jellyfishsdk/whale:' + version)
       .withNetworkMode(network.getName())
       .withEnv('WHALE_DEFID_URL', `http://whale:whale@${ip}:19554/`)
       .withEnv('WHALE_DATABASE_PROVIDER', 'level')

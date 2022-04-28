@@ -1,7 +1,7 @@
 # Oracle Adapters Contributing Guide
 
-You need `node v14`, and `npm v7` for this project, it's required to set
-up [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces).
+You need `node v16`, and `npm v8` for this project, it's required to set
+up [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces).
 
 ```shell
 npm install
@@ -71,7 +71,7 @@ TODO comments should usually include the author's github username in parentheses
 ## Publishing
 
 `"version": "0.0.0"` is used because publishing will be done automatically
-by [GitHub releases](https://github.com/DeFiCh/oracle-adapters/releases) with connected workflows. On
+by [GitHub releases](https://github.com/JellyfishSDK/oracle-adapters/releases) with connected workflows. On
 release `types: [ published, prereleased ]`, GitHub Action will automatically build all packages in this repo and
 publish it into npm.
 
@@ -115,7 +115,7 @@ mass of code concentration within project that were better separated.
 
 ## Code of conduct
 
-Please follow the guidelines outlined at https://github.com/DeFiCh/.github/blob/main/CODE_OF_CONDUCT.md
+Please follow the guidelines outlined at https://github.com/JellyfishSDK/.github/blob/main/CODE_OF_CONDUCT.md
 
 ## IntelliJ IDEA
 
