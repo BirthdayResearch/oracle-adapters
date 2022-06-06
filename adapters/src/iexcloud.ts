@@ -1,4 +1,4 @@
-import { AssetPrice, fetchAsJson, newAssetPrice } from '@defichain/salmon-fetch'
+import { AssetPrice, fetchAsJson, newAssetPrice, FetchResponse } from '@defichain/salmon-fetch'
 
 const URL = 'https://cloud.iexapis.com/stable/stock'
 
@@ -12,7 +12,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
   ))
 
   return responses
-    .flatMap((res: any) => res.data)
+    .flatMap((res: FetchResponse) => res.data)
     .map((x: any): AssetPrice => {
       const { symbol, latestPrice, latestUpdate } = x
       return newAssetPrice(symbol, latestPrice, 'USD', latestUpdate)
