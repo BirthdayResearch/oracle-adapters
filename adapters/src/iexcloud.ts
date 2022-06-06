@@ -1,14 +1,20 @@
 import { AssetPrice, fetchAsJson, newAssetPrice } from '@defichain/salmon-fetch'
 
-const URL = 'https://cloud.iexapis.com/stable/tops/last'
+const URL = 'https://cloud.iexapis.com/stable/stock'
+
+function fetchPath (symbol: string, apiToken: string): string {
+  return `${URL}/${symbol}/quote?token=${apiToken}`
+}
 
 export default async function (symbols: string[], apiToken: string): Promise<AssetPrice[]> {
-  const fetchPath = `${URL}?symbols=${symbols.join(',')}&token=${apiToken}`
-  const response = await fetchAsJson(fetchPath, {
-    method: 'GET'
-  })
+  const responses = await Promise.all(symbols.map(
+    async (symbol: string) => await fetchAsJson(fetchPath(symbol, apiToken), { method: 'GET' })
+  ))
 
-  return response.data.map((x: any): AssetPrice => {
-    return newAssetPrice(x.symbol, x.price, 'USD', x.time)
-  })
+  return responses
+    .flatMap((res: any) => res.data)
+    .map((x: any): AssetPrice => {
+      const { symbol, latestPrice, latestUpdate } = x
+      return newAssetPrice(symbol, latestPrice, 'USD', latestUpdate)
+    })
 }

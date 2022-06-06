@@ -9,22 +9,22 @@ afterEach(() => {
 
 it('should fetch price from iexcloud', async () => {
   nock('https://cloud.iexapis.com')
-    .get('/stable/tops/last?symbols=FB&token=API_TOKEN')
+    .get('/stable/stock/AMZN/quote?token=API_TOKEN')
     .reply(200, function (_) {
       return `[
           {
-            "symbol": "FB",
-            "price": 121.41,
+            "symbol": "AMZN",
+            "latestPrice": 121.41,
             "size": 1,
-            "time": 1480446908666
+            "latestUpdate": 1480446908666
           }
         ]`
     })
 
-  const prices = await iexcloud(['FB'], 'API_TOKEN')
+  const prices = await iexcloud(['AMZN'], 'API_TOKEN')
   expect(prices).toStrictEqual([
     {
-      token: 'FB',
+      token: 'AMZN',
       currency: 'USD',
       amount: new BigNumber(121.41),
       timestamp: new BigNumber(1480446908666)
@@ -34,35 +34,49 @@ it('should fetch price from iexcloud', async () => {
 
 it('should fetch multiple prices from iexcloud', async () => {
   nock('https://cloud.iexapis.com')
-    .get('/stable/tops/last?symbols=FB,IBM,SNAP&token=API_TOKEN')
+    .get('/stable/stock/AMZN/quote?token=API_TOKEN')
     .reply(200, function (_) {
       return `[
           {
-            "symbol": "FB",
-            "price": 121.41,
+            "symbol": "AMZN",
+            "latestPrice": 121.41,
             "size": 1,
-            "time": 1480446908666
-          },
-          {
-            "symbol": "IBM",
-            "price": 128.89,
-            "size": 1,
-            "time": 1649188799102
-          },
-          {
-            "symbol": "SNAP",
-            "price": 38.26,
-            "size": 100,
-            "time": 1649188799978
+            "latestUpdate": 1480446908666
           }
         ]`
     })
 
-  const prices = await iexcloud(['FB', 'IBM', 'SNAP'], 'API_TOKEN')
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/IBM/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+          {
+            "symbol": "IBM",
+            "latestPrice": 128.89,
+            "size": 1,
+            "latestUpdate": 1649188799102
+          }
+        ]`
+    })
+
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/SNAP/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+          {
+            "symbol": "SNAP",
+            "latestPrice": 38.26,
+            "size": 1,
+            "latestUpdate": 1649188799978
+          }
+        ]`
+    })
+
+  const prices = await iexcloud(['AMZN', 'IBM', 'SNAP'], 'API_TOKEN')
 
   expect(prices).toStrictEqual([
     {
-      token: 'FB',
+      token: 'AMZN',
       amount: new BigNumber(121.41),
       currency: 'USD',
       timestamp: new BigNumber(1480446908666)
