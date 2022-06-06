@@ -95,3 +95,73 @@ it('should fetch multiple prices from iexcloud', async () => {
     }
   ])
 })
+
+it('it should throw error if number of symbols does not match', async () => {
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/AMZN/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+        {
+          "symbol": "AMZN",
+          "latestPrice": 121.41,
+          "size": 1,
+          "latestUpdate": 1480446908666
+        }
+      ]`
+    })
+
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/FB/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+        {
+          "symbol": "FB",
+          "latestPrice": 121.41,
+          "size": 1,
+          "latestUpdate": 1480446908666
+        },
+        {
+          "symbol": "IBM",
+          "latestPrice": 80.10,
+          "size": 1,
+          "latestUpdate": 1480446908666
+        }
+      ]`
+    })
+
+  await expect(async () => {
+    await iexcloud(['AMZN', 'FB'], 'API_TOKEN')
+  }).rejects.toThrowError('iexcloud.invalidNumberOfSymbols')
+})
+
+it('it should throw error if symbols does not match', async () => {
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/AMZN/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+        {
+          "symbol": "AMZN",
+          "latestPrice": 121.41,
+          "size": 1,
+          "latestUpdate": 1480446908666
+        }
+      ]`
+    })
+
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/FB/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+        {
+          "symbol": "IBM",
+          "latestPrice": 121.41,
+          "size": 1,
+          "latestUpdate": 1480446908666
+        }
+      ]`
+    })
+
+  await expect(async () => {
+    await iexcloud(['AMZN', 'FB'], 'API_TOKEN')
+  }).rejects.toThrowError('iexcloud.invalidSymbols')
+})
