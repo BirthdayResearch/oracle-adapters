@@ -7,6 +7,15 @@ function fetchPath (symbol: string, apiToken: string): string {
 }
 
 export default async function (symbols: string[], apiToken: string): Promise<AssetPrice[]> {
+  // META to FB Remap
+  symbols = symbols.map(symbol => {
+    if (symbol.toLowerCase() === 'FB'.toLowerCase()) {
+      return 'META'
+    }
+    return symbol
+  })
+  // END META to FB Remap
+
   const responses = await Promise.all(symbols.map(
     async (symbol: string) => await fetchAsJson(fetchPath(symbol, apiToken), { method: 'GET' })
   ))
@@ -14,7 +23,18 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
   const stockPrices = responses
     .flatMap((res: FetchResponse) => res.data)
     .map((x: any): AssetPrice => {
-      const { symbol, latestPrice, latestUpdate } = x
+      const {
+        symbol,
+        latestPrice,
+        latestUpdate
+      } = x
+
+      // META to FB Remap
+      if (symbol.toLowerCase() === 'META'.toLowerCase()) {
+        return newAssetPrice('FB', latestPrice, 'USD', latestUpdate)
+      }
+      // END META to FB Remap
+
       return newAssetPrice(symbol, latestPrice, 'USD', latestUpdate)
     })
 
@@ -22,7 +42,8 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
     throw new Error('iexcloud.invalidNumberOfSymbols')
   }
 
-  const matchingRequestedSymbols = stockPrices.filter((stock) => !symbols.includes(stock.token)).length === 0
+  // TODO(joeldavidw): Remove META bypass condition
+  const matchingRequestedSymbols = stockPrices.filter((stock) => !symbols.includes(stock.token) && stock.token === 'META').length === 0
   if (!matchingRequestedSymbols) {
     throw new Error('iexcloud.invalidSymbols')
   }
