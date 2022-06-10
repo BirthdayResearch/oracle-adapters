@@ -43,7 +43,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
   }
 
   // TODO(joeldavidw): Remove META bypass condition
-  const matchingRequestedSymbols = stockPrices.filter((stock) => !symbols.includes(stock.token) && stock.token === 'META').length === 0
+  const matchingRequestedSymbols = stockPrices.filter((stock) => !symbols.includes(stock.token) && !symbols.includes('META')).length === 0
   if (!matchingRequestedSymbols) {
     throw new Error('iexcloud.invalidSymbols')
   }
