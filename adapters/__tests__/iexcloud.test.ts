@@ -111,11 +111,11 @@ it('it should throw error if number of symbols does not match', async () => {
     })
 
   nock('https://cloud.iexapis.com')
-    .get('/stable/stock/FB/quote?token=API_TOKEN')
+    .get('/stable/stock/AAPL/quote?token=API_TOKEN')
     .reply(200, function (_) {
       return `[
         {
-          "symbol": "FB",
+          "symbol": "AAPL",
           "latestPrice": 121.41,
           "size": 1,
           "latestUpdate": 1480446908666
@@ -130,7 +130,7 @@ it('it should throw error if number of symbols does not match', async () => {
     })
 
   await expect(async () => {
-    await iexcloud(['AMZN', 'FB'], 'API_TOKEN')
+    await iexcloud(['AMZN', 'AAPL'], 'API_TOKEN')
   }).rejects.toThrowError('iexcloud.invalidNumberOfSymbols')
 })
 
@@ -149,7 +149,7 @@ it('it should throw error if symbols does not match', async () => {
     })
 
   nock('https://cloud.iexapis.com')
-    .get('/stable/stock/FB/quote?token=API_TOKEN')
+    .get('/stable/stock/AAPL/quote?token=API_TOKEN')
     .reply(200, function (_) {
       return `[
         {
@@ -162,6 +162,31 @@ it('it should throw error if symbols does not match', async () => {
     })
 
   await expect(async () => {
-    await iexcloud(['AMZN', 'FB'], 'API_TOKEN')
+    await iexcloud(['AMZN', 'AAPL'], 'API_TOKEN')
   }).rejects.toThrowError('iexcloud.invalidSymbols')
+})
+
+it('should fetch price from iexcloud with FB META Remap', async () => {
+  nock('https://cloud.iexapis.com')
+    .get('/stable/stock/META/quote?token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[
+          {
+            "symbol": "META",
+            "latestPrice": 121.41,
+            "size": 1,
+            "latestUpdate": 1480446908666
+          }
+        ]`
+    })
+
+  const prices = await iexcloud(['FB'], 'API_TOKEN')
+  expect(prices).toStrictEqual([
+    {
+      token: 'FB',
+      currency: 'USD',
+      amount: new BigNumber(121.41),
+      timestamp: new BigNumber(1480446908666)
+    }
+  ])
 })
