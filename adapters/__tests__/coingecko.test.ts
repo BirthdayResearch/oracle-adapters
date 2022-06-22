@@ -47,6 +47,41 @@ describe('multi price fetch with mocks', () => {
       }
     ])
   })
+
+  it('should throw error if there are missing symbols', async () => {
+    nock('https://api.coingecko.com')
+      .get('/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd')
+      .reply(200, function (_) {
+        return `{
+          "dogecoin":{
+             "usd":0.208377
+          },
+          "ethereum":{
+             "usd":2299.23
+          }
+        }`
+      })
+
+    await expect(async () => {
+      await coingecko(['BTC', 'ETH', 'DOGE'])
+    }).rejects.toThrowError('coingecko.missingTickerSymbol')
+  })
+
+  it('should throw error if there is an invalid symbol', async () => {
+    nock('https://api.coingecko.com')
+      .get('/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+      .reply(200, function (_) {
+        return `{
+          "ripple":{
+             "usd":0.208377
+          }
+        }`
+      })
+
+    await expect(async () => {
+      await coingecko(['BTC'])
+    }).rejects.toThrowError('coingecko.invalidTickerSymbol')
+  })
 })
 
 describe('live multi price fetch', () => {

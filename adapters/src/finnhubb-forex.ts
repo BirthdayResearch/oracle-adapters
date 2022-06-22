@@ -45,9 +45,15 @@ export const FINNHUBB_OANDA_SYMBOL_MAPPING: Record<string, OandaSymbolMapping> =
  * https://finnhub.io
  */
 export default async function (symbols: string[], apiToken: string): Promise<AssetPrice[]> {
-  return await Promise.all(symbols.map(async symbol => {
+  const allAssetPrices = await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, apiToken)
   }))
+
+  if (allAssetPrices.length !== symbols.length) {
+    throw new Error('finnhubb-forex.missingTickerSymbol')
+  }
+
+  return allAssetPrices
 }
 
 async function fetchAsset (symbol: string, apiToken: string): Promise<AssetPrice> {
