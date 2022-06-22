@@ -8,7 +8,11 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
     method: 'GET'
   })
   const json = res.data.data
-  return Object.keys(json).map((asset: any) => {
+  const result = Object.keys(json).map((asset: any, index: number) => {
+    if (!(symbols.includes(asset))) {
+      throw new Error('coinmarketcap.invalidTickerSymbol')
+    }
+
     const data = json[asset]
     return newAssetPrice(
       asset,
@@ -17,4 +21,10 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
       new BigNumber(Date.parse(data.last_updated))
     )
   })
+
+  if (result.length !== symbols.length) {
+    throw new Error('coinmarketcap.missingTickerSymbol')
+  }
+
+  return result
 }

@@ -193,4 +193,77 @@ describe('multi price fetch', () => {
     const promise = finnhubbForex(symbols, 'API_TOKEN')
     await expect(promise).rejects.toThrow('price for token SGD is not string, number or BigNumber')
   })
+
+  it('should not fetch price as null price', async () => {
+    nock('https://finnhub.io/')
+      .filteringPath(() => {
+        return '/'
+      })
+      .get('/')
+      .reply(200, (_) => {
+        return `{
+          "c": null,
+          "h": null,
+          "l": null,
+          "o": null,
+          "s": "ok",
+          "t": null,
+          "v": null
+        }`
+      })
+
+    const symbols = ['SGD']
+
+    const promise = finnhubbForex(symbols, 'API_TOKEN')
+    await expect(promise).rejects.toThrow('price for token SGD is not string, number or BigNumber')
+  })
+
+  it('should throw error if there are missing symbols', async () => {
+    nock('https://finnhub.io/')
+      .filteringPath(() => {
+        return '/'
+      })
+      .get('/')
+      .reply(200, (_) => {
+        return `{
+          "c": [
+            1802.56,
+            1802.532
+          ],
+          "h": [
+            1802.97,
+            1802.94
+          ],
+          "l": [
+            1802.367,
+            1802.215
+          ],
+          "o": [
+            1802.97,
+            1802.51
+          ],
+          "s": "ok",
+          "t": [
+            1625805600,
+            1625805900
+          ],
+          "v": [
+            36,
+            103
+          ]
+        }`
+      })
+    nock('https://finnhub.io/')
+      .filteringPath(() => {
+        return '/'
+      })
+      .get('/')
+      .reply(200, (_) => {
+        return '{}'
+      })
+
+    await expect(async () => {
+      await finnhubbForex(['XAU', 'EUR'], 'API_TOKEN')
+    }).rejects.toThrow()
+  })
 })

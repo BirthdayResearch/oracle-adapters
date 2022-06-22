@@ -21,6 +21,9 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
     priceAdjustmentCallback: async () => {
       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
       const res: FetchResponse = await fetchAsJson(url, { method: 'GET' })
+      if (!(Object.keys(res.data).includes('bitcoin'))) {
+        throw new Error('dex.invalidTickerSymbol')
+      }
       return new BigNumber(res.data.bitcoin.usd)
     }
   }
@@ -44,7 +47,13 @@ export default async function (symbols: string[], options: DexOptions): Promise<
     return await fetchAsset(symbol, pairs)
   }))
 
-  return unfilteredAssetPrices.filter(x => (x !== undefined)) as AssetPrice[]
+  const res = unfilteredAssetPrices.filter(x => (x !== undefined)) as AssetPrice[]
+
+  if (res.length !== symbols.length) {
+    throw new Error('dex.missingTickerSymbol')
+  }
+
+  return res
 }
 
 async function getAllPairs (options: DexOptions): Promise<PoolPairData[]> {
