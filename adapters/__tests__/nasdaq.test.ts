@@ -107,7 +107,7 @@ it('should throw error on mismatched symbol', async () => {
 
   nock('https://restapi.clouddataservice.nasdaq.com/v1/nasdaq/delayed/equities/lastsale')
     .get('/TSLA')
-    .reply(500, function (_) {
+    .reply(200, function (_) {
       return `[{
           "symbol": "AMZN",
           "timestamp": "2021-08-05T16:00:02.430",
