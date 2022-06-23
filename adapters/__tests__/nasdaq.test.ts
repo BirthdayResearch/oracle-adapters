@@ -95,3 +95,32 @@ it('should error on invalid api credentials', async () => {
     await nasdaq(['TSLA', 'AAPL', 'FB'], 'API_TOKEN')
   }).rejects.toThrowError('nasdaq.unableToAuth ')
 })
+
+it('should throw error on mismatched symbol', async () => {
+  nock('https://restapi.clouddataservice.nasdaq.com/v1/auth')
+    .post('/token')
+    .reply(200, function (_) {
+      return `{
+          "access_token": "access_token"
+        }`
+    })
+
+  nock('https://restapi.clouddataservice.nasdaq.com/v1/nasdaq/delayed/equities/lastsale')
+    .get('/TSLA')
+    .reply(500, function (_) {
+      return `[{
+          "symbol": "AMZN",
+          "timestamp": "2021-08-05T16:00:02.430",
+          "price": 714.63,
+          "size": 199,
+          "conditions": "@6 X",
+          "exchange": "Q",
+          "securityClass": "Q",
+          "changeIndicator": 0
+        }]`
+    })
+
+  await expect(async () => {
+    await nasdaq(['TSLA'], 'API_TOKEN')
+  }).rejects.toThrowError('nasdaq.mismatchedTickerSymbol ')
+})
