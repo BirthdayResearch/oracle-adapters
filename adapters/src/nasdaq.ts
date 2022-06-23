@@ -52,6 +52,10 @@ async function fetchAsset (symbol: string, authToken: string): Promise<AssetPric
   const priceObject = Array.isArray(response.data) ? response.data[0] : response.data
   const timestamp = new BigNumber(processTimestamp(priceObject.timestamp))
 
+  if (symbol !== priceObject.symbol) {
+    throw new Error('nasdaq.mismatchedTickerSymbol ')
+  }
+
   return newAssetPrice(symbol, new BigNumber(priceObject.price), 'USD', timestamp)
 }
 
