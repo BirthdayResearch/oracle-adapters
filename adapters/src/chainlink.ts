@@ -55,13 +55,7 @@ async function fetchAsset (symbol: string, provider?: any): Promise<AssetPrice> 
 export default async function (symbols: string[], apiToken?: string): Promise<AssetPrice[]> {
   const provider = new ethers.providers.InfuraProvider('mainnet', apiToken)
 
-  const res = await Promise.all(symbols.map(async symbol => {
+  return await Promise.all(symbols.map(async symbol => {
     return await fetchAsset(symbol, provider)
   }))
-
-  if (res.length !== symbols.length) {
-    throw new Error('chainlink.invalidNumberOfSymbols')
-  }
-
-  return res
 }
