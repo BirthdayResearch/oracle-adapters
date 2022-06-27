@@ -3,6 +3,11 @@ import dex, { getBitcoinPrice } from '../src/dex-cmc'
 
 import BigNumber from 'bignumber.js'
 
+afterEach(() => {
+  jest.clearAllMocks()
+  nock.cleanAll()
+})
+
 describe('multi price fetch', () => {
   beforeEach(() => {
     nock('https://pro-api.coinmarketcap.com')
@@ -20,11 +25,6 @@ describe('multi price fetch', () => {
                   }
               }`
       })
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
   })
 
   it('should fetch price from defichain dex using config', async () => {

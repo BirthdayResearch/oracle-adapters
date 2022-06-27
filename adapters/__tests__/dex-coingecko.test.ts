@@ -3,6 +3,11 @@ import dex, { getBitcoinPrice } from '../src/dex-coingecko'
 
 import BigNumber from 'bignumber.js'
 
+afterEach(() => {
+  jest.clearAllMocks()
+  nock.cleanAll()
+})
+
 describe('multi price fetch', () => {
   beforeEach(() => {
     nock('https://api.coingecko.com')
@@ -14,11 +19,6 @@ describe('multi price fetch', () => {
         }
       }`
       })
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-    nock.cleanAll()
   })
 
   it('should fetch price from defichain dex using config', async () => {
