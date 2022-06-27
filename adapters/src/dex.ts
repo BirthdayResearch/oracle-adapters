@@ -35,7 +35,7 @@ export interface DexOptions {
 }
 
 /**
- * Fetches prices from Defichain DEX
+ * @deprecated use dex-coingecko instead
  */
 export default async function (symbols: string[], options: DexOptions): Promise<AssetPrice[]> {
   const pairs = await getAllPairs(options)
