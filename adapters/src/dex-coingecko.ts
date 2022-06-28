@@ -17,7 +17,11 @@ export async function getBitcoinPrice (): Promise<BigNumber> {
   )
 
   if (res.status !== 200) {
-    throw new Error('dex-cmc.invalidCoinGeckoResponse ')
+    throw new Error('dex-coingecko.invalidCoinGeckoResponse')
+  }
+
+  if (!(Object.keys(res.data).includes('bitcoin'))) {
+    throw new Error('dex-coingecko.missingBTCCoinGeckoResponse')
   }
 
   return new BigNumber(res.data.bitcoin.usd)
@@ -34,5 +38,11 @@ export default async function (symbols: string[], options: DexOptions): Promise<
     return await fetchAsset(symbol, pairs, symbolMapping)
   }))
 
-  return unfilteredAssetPrices.filter(Boolean) as AssetPrice[]
+  const prices = unfilteredAssetPrices.filter(Boolean) as AssetPrice[]
+
+  if (prices.length !== symbols.length) {
+    throw new Error('dex-coingecko.poolpairAndSymbolsMismatch')
+  }
+
+  return prices
 }

@@ -247,16 +247,16 @@ describe('multi price fetch', () => {
           }`
       })
 
-    const symbols = ['DFI']
-
-    const prices = await dex(symbols, {
-      whale: {
-        network: 'regtest',
-        url: 'https://localhost',
-        version: 'v0'
-      }
-    }, 'apiToken')
-    expect(prices).toStrictEqual([])
+    await expect(async () => {
+      const symbols = ['DFI']
+      await dex(symbols, {
+        whale: {
+          network: 'regtest',
+          url: 'https://localhost',
+          version: 'v0'
+        }
+      }, 'apiToken')
+    }).rejects.toThrowError('dex-cmc.poolpairAndSymbolsMismatch')
   })
 })
 
@@ -282,7 +282,29 @@ describe('fetch btc price', () => {
     expect(price).toStrictEqual(new BigNumber(30253.43659584541))
   })
 
-  it('should throw error if btc price not returned', async () => {
+  it('should throw error if BTC not in CMC response', async () => {
+    nock('https://pro-api.coinmarketcap.com')
+      .get('/v1/cryptocurrency/quotes/latest?symbol=BTC&CMC_PRO_API_KEY=apiToken')
+      .reply(200, function (_) {
+        return `{
+                  "data": {
+                      "ETH": {
+                          "quote": {
+                              "USD": {
+                                  "price": 30253.43659584541
+                              }
+                          }
+                      }
+                  }
+              }`
+      })
+
+    await expect(async () => {
+      await getBitcoinPrice('apiToken')
+    }).rejects.toThrowError('dex-cmc.missingBTCCMCResponse')
+  })
+
+  it('should throw error if cmc return a non 200 response', async () => {
     nock('https://pro-api.coinmarketcap.com')
       .get('/v1/cryptocurrency/quotes/latest?symbol=BTC&CMC_PRO_API_KEY=apiToken')
       .reply(500, function (_) {

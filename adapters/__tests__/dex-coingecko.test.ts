@@ -203,7 +203,7 @@ describe('multi price fetch', () => {
     ])
   })
 
-  it('should get empty as missing BTC-DFI pair', async () => {
+  it('should throw error if there are missing symbols', async () => {
     nock('https://localhost')
       .filteringPath(() => {
         return '/'
@@ -241,16 +241,16 @@ describe('multi price fetch', () => {
           }`
       })
 
-    const symbols = ['DFI']
-
-    const prices = await dex(symbols, {
-      whale: {
-        network: 'regtest',
-        url: 'https://localhost',
-        version: 'v0'
-      }
-    })
-    expect(prices).toStrictEqual([])
+    await expect(async () => {
+      const symbols = ['DFI']
+      await dex(symbols, {
+        whale: {
+          network: 'regtest',
+          url: 'https://localhost',
+          version: 'v0'
+        }
+      })
+    }).rejects.toThrowError('dex-coingecko.poolpairAndSymbolsMismatch')
   })
 })
 
@@ -270,7 +270,23 @@ describe('fetch btc price', () => {
     expect(price).toStrictEqual(new BigNumber(32436))
   })
 
-  it('should throw error if btc price not returned', async () => {
+  it('throw error if coingecko fails to return BTC price', async () => {
+    nock('https://api.coingecko.com')
+      .get('/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+      .reply(200, function (_) {
+        return `{
+          "ethereum": {
+            "usd": 32436
+          }
+        }`
+      })
+
+    await expect(async () => {
+      await getBitcoinPrice()
+    }).rejects.toThrowError('dex-coingecko.missingBTCCoinGeckoResponse')
+  })
+
+  it('should throw error if coingecko return a non 200 response', async () => {
     nock('https://api.coingecko.com')
       .get('/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
       .reply(500, function (_) {
@@ -279,6 +295,6 @@ describe('fetch btc price', () => {
 
     await expect(async () => {
       await getBitcoinPrice()
-    }).rejects.toThrowError('dex-cmc.invalidCoinGeckoResponse')
+    }).rejects.toThrowError('dex-coingecko.invalidCoinGeckoResponse')
   })
 })
