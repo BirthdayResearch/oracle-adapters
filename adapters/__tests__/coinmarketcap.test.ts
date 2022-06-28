@@ -440,6 +440,6 @@ describe('multi price fetch', () => {
     await expect(async () => {
       const symbols = ['ETH']
       await coinmarketcap(symbols, 'API_TOKEN')
-    }).rejects.toThrowError('coinmarketcap.invalidTickerSymbol')
+    }).rejects.toThrowError('coinmarketcap.mismatchedTickerSymbol')
   })
 })

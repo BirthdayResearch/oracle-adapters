@@ -22,7 +22,7 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
       const res: FetchResponse = await fetchAsJson(url, { method: 'GET' })
       if (!(Object.keys(res.data).includes('bitcoin'))) {
-        throw new Error('dex.invalidTickerSymbol')
+        throw new Error('dex.missingTickerSymbol')
       }
       return new BigNumber(res.data.bitcoin.usd)
     }
@@ -38,7 +38,7 @@ export interface DexOptions {
 }
 
 /**
- * Fetches prices from Defichain DEX
+ * @deprecated use dex-coingecko instead
  */
 export default async function (symbols: string[], options: DexOptions): Promise<AssetPrice[]> {
   const pairs = await getAllPairs(options)

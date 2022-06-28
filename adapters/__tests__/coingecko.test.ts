@@ -80,7 +80,7 @@ describe('multi price fetch with mocks', () => {
 
     await expect(async () => {
       await coingecko(['BTC'])
-    }).rejects.toThrowError('coingecko.invalidTickerSymbol')
+    }).rejects.toThrowError('coingecko.mismatchedTickerSymbol')
   })
 })
 
