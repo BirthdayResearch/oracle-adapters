@@ -38,7 +38,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
     const asset = symbolFromTicker(x.symbol)
 
     if (asset === undefined) {
-      throw Error('iexcloudforex.invalidSymbol ')
+      throw Error('iexcloudforex.invalidSymbol')
     }
 
     let price = x.rate
@@ -50,7 +50,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
   })
 
   if (allAssetPrices.length !== symbols.length) {
-    throw Error('iexcloudforex.missingTickerSymbol ')
+    throw Error('iexcloudforex.missingTickerSymbol')
   }
 
   return allAssetPrices

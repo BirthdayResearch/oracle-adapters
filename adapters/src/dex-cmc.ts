@@ -24,7 +24,7 @@ export async function getBitcoinPrice (apiToken?: string): Promise<BigNumber> {
     throw new Error('dex-cmc.invalidCMCResponse')
   }
 
-  if (!(Object.keys(res.data.data).includes('BTC'))) {
+  if (res.data.data.BTC === undefined) {
     throw new Error('dex-cmc.missingBTCCMCResponse')
   }
 

@@ -122,5 +122,5 @@ it('should throw error on mismatched symbol', async () => {
 
   await expect(async () => {
     await nasdaq(['TSLA'], 'API_TOKEN')
-  }).rejects.toThrowError('nasdaq.mismatchedTickerSymbol ')
+  }).rejects.toThrowError('nasdaq.mismatchedTickerSymbol')
 })

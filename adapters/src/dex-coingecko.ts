@@ -20,7 +20,7 @@ export async function getBitcoinPrice (): Promise<BigNumber> {
     throw new Error('dex-coingecko.invalidCoinGeckoResponse')
   }
 
-  if (!(Object.keys(res.data).includes('bitcoin'))) {
+  if (res.data.bitcoin === undefined) {
     throw new Error('dex-coingecko.missingBTCCoinGeckoResponse')
   }
 

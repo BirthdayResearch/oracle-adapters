@@ -79,7 +79,7 @@ it('should error on invalid symbol', async () => {
 
   await expect(async () => {
     await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
-  }).rejects.toThrowError(Error('iexcloudforex.invalidSymbol '))
+  }).rejects.toThrowError(Error('iexcloudforex.invalidSymbol'))
 })
 
 it('should throw error on missing symbols', async () => {
@@ -102,5 +102,5 @@ it('should throw error on missing symbols', async () => {
 
   await expect(async () => {
     await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
-  }).rejects.toThrowError(Error('iexcloudforex.missingTickerSymbol '))
+  }).rejects.toThrowError(Error('iexcloudforex.missingTickerSymbol'))
 })

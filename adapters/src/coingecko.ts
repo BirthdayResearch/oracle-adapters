@@ -21,7 +21,7 @@ export default async function (symbols: string[]): Promise<AssetPrice[]> {
   }
 
   return symbols.map((symbol: string): AssetPrice => {
-    if (!(Object.keys(res.data).includes(MAPPING[symbol]))) {
+    if (res.data[MAPPING[symbol]] === undefined) {
       throw new Error('coingecko.mismatchedTickerSymbol')
     }
 
