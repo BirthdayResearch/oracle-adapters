@@ -8,7 +8,7 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
     method: 'GET'
   })
   const json = res.data.data
-  const result = Object.keys(json).map((asset: any, index: number) => {
+  const result = Object.keys(json).map((asset: any) => {
     if (!(symbols.includes(asset))) {
       throw new Error('coinmarketcap.mismatchedTickerSymbol')
     }
