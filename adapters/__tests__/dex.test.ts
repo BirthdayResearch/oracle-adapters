@@ -443,6 +443,6 @@ describe('multi price fetch when coingecko fails', () => {
           version: 'v0'
         }
       })
-    }).rejects.toThrowError('dex.invalidTickerSymbol')
+    }).rejects.toThrowError('dex.missingTickerSymbol')
   })
 })
