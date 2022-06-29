@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js'
 import { poolpairs, WhaleApiClient } from '@defichain/whale-api-client'
 import { AssetPrice, fetchAsJson, FetchResponse, newAssetPrice } from '@defichain/salmon-fetch'
+import { NetworkName } from '@defichain/jellyfish-network'
 
 type PoolPairData = poolpairs.PoolPairData
 
@@ -29,7 +30,7 @@ const DEFICHAIN_DEX_SYMBOL_MAPPING: Record<string, DefichainSymbolMapping> = {
 export interface DexOptions {
   whale: {
     url: string
-    network: string
+    network: NetworkName
     version: string
   }
 }
