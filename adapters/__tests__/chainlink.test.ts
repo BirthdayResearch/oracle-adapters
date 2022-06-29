@@ -93,6 +93,29 @@ describe('should fetch price from chainlink - nock', () => {
     const symbols = ['BTC']
     await expect(chainlink(symbols, 'API_TOKEN')).rejects.toThrow()
   })
+
+  it('should throw error on incomplete data', async () => {
+    nock('https://mainnet.infura.io/v3')
+      .post('/API_TOKEN')
+      .reply(200, (_) => {
+        return '{"jsonrpc":"2.0","id":42,"result":"0x0000000000000000000000000000000000000000000000000000042f6e63a936"}'
+      })
+
+    nock('https://mainnet.infura.io/v3')
+      .post('/API_TOKEN')
+      .reply(200, (_) => {
+        return '{"jsonrpc":"2.0","id":42,"result":"0x0000000000000000000000000000000000000000000000000000042f6e63a936"}'
+      })
+
+    nock('https://mainnet.infura.io/v3')
+      .post('/API_TOKEN')
+      .reply(200, (_) => {
+        return '{"jsonrpc":"2.0","id":42,"result":"0x0000000000000000000000000000000000000000000000000000042f6e63a936"}'
+      })
+
+    const symbols = ['BTC', 'ETH']
+    await expect(chainlink(symbols, 'API_TOKEN')).rejects.toThrow()
+  })
 })
 
 describe('should fetch price from chainlink - live without api tokens', () => {

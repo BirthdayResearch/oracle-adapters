@@ -34,11 +34,11 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
     method: 'GET'
   })
 
-  return response.data.map((x: any) => {
+  const allAssetPrices = response.data.map((x: any) => {
     const asset = symbolFromTicker(x.symbol)
 
     if (asset === undefined) {
-      throw Error('iexcloudforex.invalidSymbol ')
+      throw Error('iexcloudforex.invalidSymbol')
     }
 
     let price = x.rate
@@ -48,6 +48,12 @@ export default async function (symbols: string[], apiToken: string): Promise<Ass
 
     return newAssetPrice(asset, price, 'USD', x.timestamp)
   })
+
+  if (allAssetPrices.length !== symbols.length) {
+    throw Error('iexcloudforex.missingTickerSymbol')
+  }
+
+  return allAssetPrices
 }
 
 function symbolFromTicker (ticker: string): string | undefined {

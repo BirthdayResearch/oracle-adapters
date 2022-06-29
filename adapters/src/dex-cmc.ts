@@ -21,7 +21,11 @@ export async function getBitcoinPrice (apiToken?: string): Promise<BigNumber> {
   )
 
   if (res.status !== 200) {
-    throw new Error('dex-cmc.invalidCMCResponse ')
+    throw new Error('dex-cmc.invalidCMCResponse')
+  }
+
+  if (res.data.data.BTC === undefined) {
+    throw new Error('dex-cmc.missingBTCCMCResponse')
   }
 
   return new BigNumber(res.data.data.BTC.quote.USD.price)
@@ -38,5 +42,11 @@ export default async function (symbols: string[], options: DexOptions, apiToken:
     return await fetchAsset(symbol, pairs, symbolMapping, apiToken)
   }))
 
-  return unfilteredAssetPrices.filter(Boolean) as AssetPrice[]
+  const prices = unfilteredAssetPrices.filter(Boolean) as AssetPrice[]
+
+  if (prices.length !== symbols.length) {
+    throw new Error('dex-cmc.poolpairAndSymbolsMismatch')
+  }
+
+  return prices
 }

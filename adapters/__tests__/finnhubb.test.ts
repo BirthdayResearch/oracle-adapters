@@ -94,3 +94,27 @@ it('should fetch multiple prices from finnhubb', async () => {
     }
   ])
 })
+
+it('should throw error if there are missing symbols', async () => {
+  nock('https://finnhub.io/api/v1/quote')
+    .get('?symbol=AAPL&token=API_TOKEN')
+    .reply(200, function (_) {
+      return `{
+          "c": 261.74,
+          "h": 263.31,
+          "l": 260.68,
+          "o": 261.07,
+          "pc": 259.45,
+          "t": 1582641000 
+        }`
+    })
+  nock('https://finnhub.io/api/v1/quote')
+    .get('?symbol=AMZN&token=API_TOKEN')
+    .reply(200, function (_) {
+      return '{}'
+    })
+
+  await expect(async () => {
+    await finnhubb(['AAPL', 'AMZN'], 'API_TOKEN')
+  }).rejects.toThrow()
+})

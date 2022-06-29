@@ -16,7 +16,15 @@ export default async function (symbols: string[]): Promise<AssetPrice[]> {
   const ids = symbols.map(symbol => MAPPING[symbol])
   const res = await fetchAsJson(`${URL}?ids=${ids.join(',')}&vs_currencies=usd`)
 
+  if (Object.keys(res.data).length !== symbols.length) {
+    throw new Error('coingecko.missingTickerSymbol')
+  }
+
   return symbols.map((symbol: string): AssetPrice => {
+    if (res.data[MAPPING[symbol]] === undefined) {
+      throw new Error('coingecko.mismatchedTickerSymbol')
+    }
+
     return newAssetPrice(symbol, res.data[MAPPING[symbol]].usd, 'USD', Date.now())
   })
 }

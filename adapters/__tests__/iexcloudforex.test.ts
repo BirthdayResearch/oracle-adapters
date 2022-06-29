@@ -79,5 +79,28 @@ it('should error on invalid symbol', async () => {
 
   await expect(async () => {
     await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
-  }).rejects.toThrowError(Error('iexcloudforex.invalidSymbol '))
+  }).rejects.toThrowError(Error('iexcloudforex.invalidSymbol'))
+})
+
+it('should throw error on missing symbols', async () => {
+  nock('https://cloud.iexapis.com')
+    .get('/stable/fx/latest?symbols=USDCAD,USDGBP,USDJPY&token=API_TOKEN')
+    .reply(200, function (_) {
+      return `[ 
+          {
+            "symbol": "USDCAD",
+            "rate": 1.31,
+            "timestamp":  1288282222000
+          },
+          {
+            "symbol": "USDGBP",
+            "rate": 0.755,
+            "timestamp":  1288282222000
+          }
+        ]`
+    })
+
+  await expect(async () => {
+    await iexcloudForex(['CAD', 'GBP', 'JPY'], 'API_TOKEN')
+  }).rejects.toThrowError(Error('iexcloudforex.missingTickerSymbol'))
 })
