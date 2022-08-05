@@ -12,9 +12,7 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/jellyfish-testing": "^2.67.2",
     "@defichain/jellyfish-network": "^2.67.2",
-    "@defichain/testcontainers": "^2.67.2",
     "@defichain/salmon-fetch": "0.0.0",
     "@defichain/salmon-filter": "0.0.0",
     "@defichain/salmon-wallet": "0.0.0",
@@ -22,5 +20,9 @@
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
+  },
+  "devDependencies": {
+    "@defichain/jellyfish-testing": "^2.47.1",
+    "@defichain/testcontainers": "^2.47.1"
   }
 }
