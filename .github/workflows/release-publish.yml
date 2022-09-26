@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 16
 
-      - uses: actions/github-script@7a5c598405937d486b0331594b5da2b14db670da
+      - uses: actions/github-script@d4560e157075e2d93aa3022b5b51a42a880f1f93
         id: version
         with:
           script: |
