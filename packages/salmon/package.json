@@ -22,7 +22,7 @@
     "@defichain/salmon-core": "0.0.0"
   },
   "devDependencies": {
-    "@defichain/jellyfish-testing": "^2.47.1",
-    "@defichain/testcontainers": "^2.47.1"
+    "@defichain/jellyfish-testing": "^2.67.2",
+    "@defichain/testcontainers": "^2.67.2"
   }
 }
