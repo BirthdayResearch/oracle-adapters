@@ -22,7 +22,7 @@
     "eslint-config-standard-with-typescript": "21.0.1",
     "husky": "8.0.1",
     "jest": "27.5.1",
-    "lerna": "5.5.2",
+    "lerna": "5.6.2",
     "lint-staged": "13.0.3",
     "nock": "13.2.9",
     "ts-jest": "27.1.5",
