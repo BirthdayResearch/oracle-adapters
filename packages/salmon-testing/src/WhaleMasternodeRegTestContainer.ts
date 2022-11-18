@@ -29,12 +29,14 @@ export class WhaleMasternodeRegTestContainer {
 
     const ip = await this.ain.getIp(network.getName())
     this.whale = await new GenericContainer('ghcr.io/jellyfishsdk/whale-api:' + version)
-      .withNetworkMode(network.getName())
-      .withEnv('WHALE_DEFID_URL', `http://whale:whale@${ip}:19554/`)
-      .withEnv('WHALE_DATABASE_PROVIDER', 'level')
-      .withEnv('WHALE_DATABASE_LEVEL_LOCATION', '.level/index')
-      .withEnv('WHALE_NETWORK', 'regtest')
-      .withEnv('WHALE_VERSION', 'v0')
+      .withNetwork(network)
+      .withEnvironment({
+        WHALE_DEFID_URL: `http://whale:whale@${ip}:19554/`,
+        WHALE_DATABASE_PROVIDER: 'level',
+        WHALE_DATABASE_LEVEL_LOCATION: '.level/index',
+        WHALE_NETWORK: 'regtest',
+        WHALE_VERSION: 'v0'
+      })
       .withExposedPorts(3000)
       .start()
   }

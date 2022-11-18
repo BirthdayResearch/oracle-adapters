@@ -14,7 +14,7 @@
   "dependencies": {
     "@defichain/testcontainers": "^2.69.0",
     "@defichain/whale-api-client": "^2.69.0",
-    "testcontainers": "^8.4.0"
+    "testcontainers": "^9.0.0"
   },
   "peerDependencies": {
     "@defichain/salmon-core": "0.0.0"
