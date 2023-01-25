@@ -13,6 +13,10 @@
   "rangeStrategy": "bump",
   "packageRules": [
     {
+      "matchPackagePatterns": ["lerna"],
+      "enabled": false
+    },
+    {
       "matchManagers": ["github-actions"],
       "enabled": false
     },
