@@ -98,7 +98,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -113,7 +113,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -127,7 +127,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -140,7 +140,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -153,7 +153,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -166,7 +166,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -179,7 +179,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -192,7 +192,7 @@ describe(`default TimestampFilter - timeDelta: ${timeDelta.toString()}ms`, () =>
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -229,8 +229,8 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
     const minAge = new BigNumber(1000 * 60 * 30).negated()
 
     filter = new TimestampFilter(network, client, oracleId, {
-      maxAge: maxAge,
-      minAge: minAge
+      maxAge,
+      minAge
     })
   })
 
@@ -312,7 +312,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -327,7 +327,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -342,7 +342,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -357,7 +357,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -372,7 +372,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
           token: 'TSLA',
           amount: new BigNumber(1),
           currency: 'USD',
-          timestamp: timestamp
+          timestamp
         }
       ])
     }).rejects.toThrowError('TimestampFilter.isInvalid ')
@@ -386,7 +386,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -399,7 +399,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -412,7 +412,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -425,7 +425,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })
@@ -438,7 +438,7 @@ describe(`TimestampFilter with custom options (maxAge: 2 week, minAge: 30 mins) 
         token: 'TSLA',
         amount: new BigNumber(1),
         currency: 'USD',
-        timestamp: timestamp
+        timestamp
       }
     ])
   })

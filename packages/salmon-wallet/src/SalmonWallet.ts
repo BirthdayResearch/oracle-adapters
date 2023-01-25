@@ -44,12 +44,12 @@ export class SalmonWallet {
       .oracles.setOracleData(data, change)
 
     const hex = new CTransactionSegWit(signed).toHex()
-    return await this.client.rawtx.send({ hex: hex })
+    return await this.client.rawtx.send({ hex })
   }
 
   private static createSetOracleData (oracleId: string, prices: AssetPrice[]): SetOracleData {
     return {
-      oracleId: oracleId,
+      oracleId,
       timestamp: new BigNumber(Math.floor(Date.now() / 1000)),
       tokens: prices.map(value => {
         return {
