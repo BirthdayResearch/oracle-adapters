@@ -42,9 +42,9 @@ export function newAssetPrice (token: string, price: string | number | BigNumber
   }
 
   return {
-    token: token,
+    token,
     amount: BigNumber.isBigNumber(price) ? price : new BigNumber(price),
-    currency: currency,
+    currency,
     timestamp: BigNumber.isBigNumber(timestamp) ? timestamp : new BigNumber(timestamp)
   }
 }
