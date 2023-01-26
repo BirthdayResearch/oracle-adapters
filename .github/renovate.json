@@ -17,10 +17,6 @@
       "enabled": false
     },
     {
-      "matchManagers": ["github-actions"],
-      "enabled": false
-    },
-    {
       "matchPackagePatterns": ["^@defichain/salmon-"],
       "enabled": false
     },
