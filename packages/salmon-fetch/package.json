@@ -12,7 +12,7 @@
     "build": "tsc -b ./tsconfig.build.json"
   },
   "dependencies": {
-    "@defichain/jellyfish-json": "^3.24.2",
+    "@defichain/jellyfish-json": "^3.29.1",
     "abort-controller": "^3.0.0",
     "cross-fetch": "^3.1.5"
   },
