@@ -10,7 +10,7 @@ const MAPPING: Record<string, string> = {
   LTC: 'litecoin',
   USDT: 'tether',
   USDC: 'usd-coin',
-  EUROC: 'euro-coin'
+  EURC: 'euro-coin'
 }
 
 export default async function (symbols: string[]): Promise<AssetPrice[]> {
