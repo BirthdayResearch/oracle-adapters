@@ -28,7 +28,7 @@ export class WhaleMasternodeRegTestContainer {
     await this.ain.restart()
 
     const ip = await this.ain.getIp(network.getName())
-    this.whale = await new GenericContainer('ghcr.io/jellyfishsdk/whale-api:' + version)
+    this.whale = await new GenericContainer('ghcr.io/birthdayresearch/whale-api:' + version)
       .withNetwork(network)
       .withEnvironment({
         WHALE_DEFID_URL: `http://whale:whale@${ip}:19554/`,
